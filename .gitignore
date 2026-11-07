@@ -1,0 +1,16 @@
+# ambiente
+venv/
+__pycache__/
+*.pyc
+
+# backups locais
+*.orig.py
+*.pre_*.py
+*.pre_pandas_patch.py
+*.pre_njobs.py
+
+# logs e dados grandes
+logs/
+data/
+results/*.out
+results/*.err
