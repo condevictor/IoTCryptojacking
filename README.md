@@ -21,3 +21,7 @@ in Heterogeneous Smart Home Networks" (NDSS 2022).
 - **Acurácia idêntica** (paralelização dos folds, não mudança de cálculo).
 - Tempo: ~7h → ~1h por cenário.
 - Backup original: `*.pre_njobs.py` (ignorado pelo Git).
+
+## Documentação adicional
+
+- [`docs/limitacoes-iot23.md`](docs/limitacoes-iot23.md) — limitações da adaptação ao IoT-23
