@@ -1,4 +1,4 @@
-# IF848 — Detecção de Intrusão (IoT Cryptojacking)
+# CIN0114 - Técnicas de ataque e detecção de intrusão
 
 Reprodução do artigo: Tekiner et al., "A Lightweight IoT Cryptojacking Detection Mechanism
 in Heterogeneous Smart Home Networks" (NDSS 2022).
