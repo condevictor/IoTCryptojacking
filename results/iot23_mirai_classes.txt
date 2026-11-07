@@ -1,0 +1,7 @@
+Capture 34-1 (Mirai) - conn.log.labeled:
+- Total de linhas: 23.154 (incluindo ~7 de cabecalho)
+- Benign: 1.923 (8,3%)
+- Malicious C&C: 6.706 (29,0%)
+- Malicious DDoS: 14.394 (62,2%)
+- Malicious PortScan: 122 (0,5%)
+- Total de fluxos: ~23.145

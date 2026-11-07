@@ -1,0 +1,8 @@
+Melhoria de eficiencia aplicada ao Benign-2 (e futuros cenarios):
+- Arquivo: Malicious_vs_Benign_2 (All Scenarios).py
+- Mudanca: cross_validate(..., scoring=scoring) -> cross_validate(..., scoring=scoring, n_jobs=-1)
+- Efeito: os 5 folds do cross-validation rodam em paralelo (5 nucleos) em vez de serie (1 nucleo)
+- Acuracia: IDENTICA (cada fold treina o mesmo modelo nos mesmos dados)
+- Tempo: ~7h30 (Benign-1, n_jobs=1) -> ~5h15 (Benign-2, n_jobs=-1)
+- CPULoad: 1.03 (Benign-1) -> 7.61 (Benign-2)
+- Justificativa: o codigo original usa n_jobs=1 (default), desperdicando 47 dos 48 nucleos alocados

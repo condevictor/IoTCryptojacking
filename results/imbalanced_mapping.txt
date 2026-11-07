@@ -1,0 +1,7 @@
+Bloco | Cenario | Malicious | Benign | Support | SVM Acc | Observacao
+1 | Subset imbalanced | 9741 | 1634689 | 41111 | 0.99 | benign 0.00 (SVM prediz tudo malignant)
+2 | Full balanced | 2360951 | 2360951 | 118048 | 0.97 | balanceado
+3 | Mais malicious | 1217322 | 290397 | 37694 | 0.98 | imbalance moderado
+4 | Mais benign | 234272 | 766394 | 25017 | 0.99 | bom
+5 | Mais benign | 64064 | 561625 | 15643 | 0.97 | bom
+6 | Mais benign | 41572 | 177704 | 5483 | 0.97 | bom

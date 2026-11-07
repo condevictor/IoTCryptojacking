@@ -1,0 +1,7 @@
+Achados do Transferability (S9):
+- 8 cenarios de transferencia entre dispositivos (treina em um, testa em outro).
+- Cenarios 5-7 (support ~57k): accuracy ~0.99-1.00 -> transferencia funciona bem entre dispositivos similares.
+- Cenario 2 (support 12451): SVM accuracy 0.69 (vs LogReg 0.96, GNB 0.93) -> SVM falha em transferencia dificil. Isso e o oposto do artigo (que reporta SVM como melhor).
+- Cenarios 1-4 (support 13k-32k): accuracy 0.85-0.96 -> transferencia entre dispositivos heterogeneos e mais dificil.
+- Cenarios 6 e 7 tem resultados identicos (mesmo par de dispositivos, provavelmente ida e volta).
+- Conclusao para o relatorio: a transferabilidade depende da similaridade entre dispositivos; o SVM nao e robusto em todos os cenarios (diferente do artigo).

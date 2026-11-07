@@ -1,0 +1,10 @@
+LogReg
+              precision    recall  f1-score   support
+
+   malignant       0.98      0.96      0.97     38943
+      benign       0.96      0.98      0.97     38911
+
+    accuracy                           0.97     77854
+   macro avg       0.97      0.97      0.97     77854
+weighted avg       0.97      0.97      0.97     77854
+

@@ -1,0 +1,10 @@
+#    Modelo   Accuracy   Support 
+-----------------------------------
+1    SVM      0.99       41111   
+2    SVM      0.97       118048  
+3    SVM      0.98       37694   
+4    SVM      0.99       25017   
+5    SVM      0.97       15643   
+6    SVM      0.97       5483    
+
+Total: 6 resultados

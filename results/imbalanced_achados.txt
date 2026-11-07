@@ -1,0 +1,10 @@
+Achados do Imbalanced (S8):
+- O SVM foi o unico modelo testado (6 cenarios de desbalanceamento).
+- Cenario 1 (9741 malicious vs 1634689 benign): SVM com accuracy 0.99, MAS
+  benign precision=0.00, recall=0.00 -> o SVM prediz "malignant" para tudo.
+  Isso demonstra que accuracy e enganosa em datasets extremamente desbalanceados.
+- Cenarios 2-6: SVM com accuracy 0.97-0.99, com precision/recall razoaveis.
+- Conclusao para o relatorio: em cenarios de desbalanceamento extremo, o SVM
+  default (sem class_weight='balanced') falha em detectar a classe minoritaria.
+  Isso e consistente com a limitacao discutida no artigo (falta de tratamento
+  de desbalanceamento).

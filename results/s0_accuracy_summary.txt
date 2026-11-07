@@ -1,0 +1,104 @@
+80:LogReg
+86:    accuracy                           0.97     77854
+98:KNN
+104:    accuracy                           0.98     77854
+121:SVM
+127:    accuracy                           0.98     77854
+149:GNB
+155:    accuracy                           0.96     77854
+191:LogReg
+197:    accuracy                           0.98     60749
+209:KNN
+215:    accuracy                           0.99     60749
+232:SVM
+238:    accuracy                           0.99     60749
+260:GNB
+266:    accuracy                           0.99     60749
+302:LogReg
+308:    accuracy                           0.98     11719
+320:KNN
+326:    accuracy                           0.98     11719
+343:SVM
+349:    accuracy                           0.98     11719
+371:GNB
+377:    accuracy                           1.00     11719
+413:LogReg
+419:    accuracy                           0.94      3079
+431:KNN
+437:    accuracy                           0.94      3079
+454:SVM
+460:    accuracy                           0.93      3079
+482:GNB
+488:    accuracy                           1.00      3079
+524:LogReg
+530:    accuracy                           0.94       494
+542:KNN
+548:    accuracy                           0.89       494
+565:SVM
+571:    accuracy                           0.91       494
+593:GNB
+599:    accuracy                           1.00       494
+635:LogReg
+641:    accuracy                           0.84       510
+653:KNN
+659:    accuracy                           0.84       510
+676:SVM
+682:    accuracy                           0.82       510
+704:GNB
+710:    accuracy                           0.99       510
+746:LogReg
+752:    accuracy                           0.98     75997
+764:KNN
+770:    accuracy                           0.98     75997
+787:SVM
+793:    accuracy                           0.98     75997
+815:GNB
+821:    accuracy                           0.98     75997
+857:LogReg
+863:    accuracy                           0.94     15297
+875:KNN
+881:    accuracy                           0.95     15297
+898:SVM
+904:    accuracy                           0.95     15297
+926:GNB
+932:    accuracy                           1.00     15297
+968:LogReg
+974:    accuracy                           0.99     62541
+986:KNN
+992:    accuracy                           0.99     62541
+1009:SVM
+1015:    accuracy                           0.99     62541
+1037:GNB
+1043:    accuracy                           0.99     62541
+1079:LogReg
+1085:    accuracy                           0.97     77854
+1097:KNN
+1103:    accuracy                           0.98     77854
+1120:SVM
+1126:    accuracy                           0.98     77854
+1148:GNB
+1154:    accuracy                           0.96     77854
+1190:LogReg
+1196:    accuracy                           0.98     12329
+1208:KNN
+1214:    accuracy                           0.97     12329
+1231:SVM
+1237:    accuracy                           0.98     12329
+1259:GNB
+1265:    accuracy                           1.00     12329
+1301:LogReg
+1307:    accuracy                           0.95       666
+1319:KNN
+1325:    accuracy                           0.93       666
+1342:SVM
+1348:    accuracy                           0.93       666
+1370:GNB
+1376:    accuracy                           0.82       666
+1412:LogReg
+1418:    accuracy                           0.92      2395
+1430:KNN
+1436:    accuracy                           0.91      2395
+1453:SVM
+1459:    accuracy                           0.91      2395
+1481:GNB
+1487:    accuracy                           0.98      2395

@@ -1,0 +1,14 @@
+Bloco | Linha | Variavel | Cenario | Support
+1 | 437 | results_all_combined_s0 | S0 (all devices) | 77854
+2 | 469 | results_server_s1 | S1 - Server | 60749
+3 | 497 | results_Laptop_s1 | S1 - Laptop | 11719
+4 | 527 | results_Raspberry_s1 | S1 - Raspberry | 3079
+5 | 559 | results_THR_10_s2 | S2 - Aggressive (thr 10) | 494
+6 | 590 | results_THR_50_s2 | S2 - Robust (thr 50) | 510
+7 | 619 | results_THR_100_s2 | S2 - Stealthy (thr 100) | 75997
+8 | 650 | results_In_s3 | S3 - In-browser | 15297
+9 | 679 | results_Host_s3 | S3 - Host-based | 62541
+10 | 711 | results_all_combined_s0 | S4 - Fully compromised | 77854
+11 | 744 | results_all_combined_s0 | S5 - Partially compromised | 12329
+12 | 778 | results_all_combined_s0 | S6 - Single compromised | 666
+13 | 811 | results_all_combined_s0 | S7 - IoT+IoT | 2395

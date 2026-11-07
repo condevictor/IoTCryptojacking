@@ -1,0 +1,15 @@
+Bloco | Cenario | Support
+1 | S0 (all devices) | 77226
+2 | S1 - Server | 61457
+3 | S1 - Desktop | 11832
+4 | S1 - Raspberry | 3369
+5 | S1 - WebOS | 2133
+6 | S2 - Th10 (Aggressive) | 584
+7 | S2 - Th50 (Robust) | 1392
+8 | S2 - Th100 (Stealthy) | 76444
+9 | S3 - In-browser | 15520
+10 | S3 - Host | 62019
+11 | S4 - Fully compromised | 77967
+12 | S5 - Partially compromised | 12351
+13 | S6 - Single compromised | 631
+14 | S7 - IoT+IoT | 2630
