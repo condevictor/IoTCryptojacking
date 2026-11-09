@@ -1,0 +1,13 @@
+Novo dataset (Benign-1 + CJ-Sniffer, packet-level, bursts de 10):
+- Total: 3.771.440 pacotes -> 159.030 bursts (67.793 Benign + 91.237 Cryptojacking)
+- Subamostrado: 20.000 bursts (10k + 10k) para viabilidade do tsfresh
+- CV: StratifiedGroupKFold (5 folds), com 67 grupos (6 MACs benignos + 64 pcaps CJ)
+- Holdout: split manual por grupo (2 dispositivos benignos + 15 pcaps CJ no teste)
+- RESULTADO HONESTO (sem leakage):
+  * Accuracy: 0.89
+  * Benign recall: 0.85 (545 falsos positivos de 3.642)
+  * Cryptojacking recall: 0.995 (7 falsos negativos de 1.559)
+  * Precision Cryptojacking: 0.74
+  * Confusion matrix: [[3097, 545], [7, 1552]]
+- Observacao: ROC-AUC do CV = nan (folds single-class, limitação dos 6 MACs benignos).
+  Reportar accuracy do CV (0.8355) e holdout estratificado como metricas principais.
