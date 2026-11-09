@@ -1,0 +1,10 @@
+S10 (Non-default parameters) - subamostragem 15k/classe:
+- O codigo original testa 16 variacoes de SVM em 13 cenarios.
+- Nos cenarios com dataset completo, o SVC() default (max_iter=-1) NAO CONVERGIA
+  (job 19131 travou apos ~48h no 2o cenario).
+- Solucao: subamostragem para no maximo 15.000 amostras por classe (30k total).
+  * 8 de 13 cenarios usam 100% dos dados (sao menores que 15k/classe)
+  * 5 cenarios grandes (S0, S1 Server, S2 THR_100, S3 Host, S4) sao subamostrados (~39-49%)
+- Os parametros do SVM (16 variacoes) sao os MESMOS do artigo.
+- Resultado: 13 cenarios completaram em ~16 min (vs. ~48h sem convergir).
+- Resultados: results/s10_sub_full.out (208 blocos = 13 x 16)
