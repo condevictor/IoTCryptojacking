@@ -1,0 +1,9 @@
+S10 (Non-default parameters) - execucao parcial:
+- Cenario 1 (subamostrado 1000/1000): completo em 12 min (16 variacoes de SVM).
+- Cenario 2 (dataset completo 1.2M/1.2M): tsfresh concluido em ~12 min,
+  mas o SVM non-default NAO CONVERGIU apos ~48h (out parado em 730 linhas).
+- Causa provavel: variacoes com gamma='auto' e/ou C alto nao atingem a
+  tolerancia do solver (max_iter=-1, sem limite) em datasets grandes.
+- Total executado: ~49h (2 dias, 1h22m), 1 de 13 cenarios.
+- Decisao: cancelado para liberar o QOS para o IoT-23 e o relatorio (prazo 18/11).
+- Resultados parciais: results/nondefault_parcial.out (730 linhas).
