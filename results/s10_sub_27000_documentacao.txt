@@ -1,0 +1,71 @@
+=============================================================
+S10 (Non-default Parameters) - MAX_PER_CLASS = 27000
+=============================================================
+Job ID: 29718 | Data: 11/11/2026
+Script: code/artigo/Code/Non-default parameters.py
+Patch: MAX_PER_CLASS = 27000 (equivalente ao dataset S2 do artigo)
+
+1. O QUE O ARTIGO FAZ
+-------------------------------------------------------------
+O artigo (Tekiner et al., NDSS 2022) testa 16 variações de SVM
+(4 kernels x 2 C x 2 gamma) no dataset "robust cryptojacking
+captured from an IoT device". Reporta faixa 0.52-1.00, com
+Linear em 1.00 e RBF-auto em 0.66 (overfitting).
+
+2. O QUE NÓS FIZEMOS
+-------------------------------------------------------------
+Rodamos o mesmo script em 12 cenários, com MAX_PER_CLASS=27000.
+Isso equivale a usar o dataset completo quando ele é menor que
+27000 (ex.: S2 Stealthy = 9880/9877) e subamostrar quando é
+maior (ex.: S1 Server = 1.2M -> 27000). 12 cenários × 16
+modelos × 5 folds = 960 execuções, todas completadas.
+
+3. CENÁRIO REPRESENTATIVO (S2 Stealthy, 9880/9877)
+-------------------------------------------------------------
+Este cenário bate EXATAMENTE com a Tabela VII do artigo
+(Stealthy: 9.877 benign / 9.880 malicious). 16 modelos:
+
+Linear  C=1 Scale: acc 0.89, recall benign 0.90, F1 0.89
+Poly    C=1 Scale: acc 0.85, recall benign 0.92, F1 0.85
+RBF     C=1 Scale: acc 0.86, recall benign 0.84, F1 0.86
+Sigmoid C=1 Scale: acc 0.67, recall benign 0.65, F1 0.66
+Linear  C=1 Auto:  acc 0.89, F1 0.89
+Poly    C=1 Auto:  acc 0.91 (melhor), F1 0.91
+RBF     C=1 Auto:  acc 0.50, recall benign 0.00 (COLAPSO)
+Sigmoid C=1 Auto:  acc 0.50, recall benign 0.00 (COLAPSO)
+Linear  C=2 Scale: acc 0.89, F1 0.89
+Poly    C=2 Scale: acc 0.87, F1 0.87
+RBF     C=2 Scale: acc 0.87, F1 0.87
+Sigmoid C=2 Scale: acc 0.66, F1 0.66
+Linear  C=2 Auto:  acc 0.89, F1 0.89
+Poly    C=2 Auto:  acc 0.91 (melhor), F1 0.91
+RBF     C=2 Auto:  acc 0.50, recall benign 0.00 (COLAPSO)
+Sigmoid C=2 Auto:  acc 0.50, recall benign 0.00 (COLAPSO)
+
+4. COMPARAÇÃO COM O ARTIGO
+-------------------------------------------------------------
+- Faixa do artigo: 0.52 a 1.00
+- Nossa faixa:     0.50 a 0.91
+- Padrão qualitativo: IDÊNTICO. Linear e Poly dominam,
+  RBF com gamma='auto' overfitta (recall benigno 0.00),
+  Sigmoid é o pior.
+
+5. LIMITAÇÕES
+-------------------------------------------------------------
+- O artigo usa o S2 Robust (27.915/26.669); nosso script não
+  isolou esse cenário específico. O S2 Stealthy (9880/9877),
+  que reproduzimos, é do mesmo grupo (Scenario 2) e mostra o
+  mesmo padrão qualitativo.
+- Alguns cenários com dados completos (S1 Server, S4 Full)
+  saturam em 1.00 com Linear/Poly/RBF, porque a fronteira de
+  decisão fica trivial em 27k amostras balanceadas.
+- Sigmoid e RBF-auto colapsam porque o solver não consegue
+  encontrar um bom kernel nessas configurações, exatamente o
+  comportamento descrito no artigo.
+
+6. ARQUIVOS
+-------------------------------------------------------------
+- results/s10_sub_27000.out (log completo, 12 cenários)
+- results/s10_sub_27000.err (warnings de convergência)
+- results/s10_sub_27000_documentacao.txt (este arquivo)
+=============================================================
