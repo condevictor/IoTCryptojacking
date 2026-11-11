@@ -1,0 +1,53 @@
+=============================================================
+Mitigacao de Vies de Dominio (Benign-1 + CJ-Sniffer)
+=============================================================
+Job ID: 29736 | Data: 11/11/2026
+Script: combined_train_domain.py
+Features: 10 features normalizadas (sem valores absolutos)
+
+1. DIAGNOSTICO DE VIES
+-------------------------------------------------------------
+Domain classifier accuracy: 0.9753 (+/- 0.0448)
+-> As features normalizadas ainda separam as fontes com 97.5%
+   de acuracia. O vies e estrutural: vem da diferenca de
+   hardware entre Benign-1 (smart homes) e CJ-Sniffer (mining
+   rigs Intel/M1), nao das features absolutas.
+
+2. CENARIO A (features normalizadas, SEM CORAL)
+-------------------------------------------------------------
+CV Accuracy: 0.9618 (+/- 0.0658)
+Holdout Accuracy: 0.9999
+Confusion Matrix: [[43565, 1], [5, 17475]]
+-> 1 falso positivo, 5 falsos negativos
+-> Ainda inflado: o modelo usa features normalizadas, mas
+   estas ainda codificam hardware.
+
+3. CENARIO B (features normalizadas + CORAL)
+-------------------------------------------------------------
+Domain classifier pos-CORAL: 0.9162 (reduziu de 0.975)
+CV Accuracy: 0.9506 (+/- 0.0738)
+Holdout Accuracy: 0.9512
+Confusion Matrix: [[40587, 2979], [0, 17480]]
+Benign:     precision 1.00, recall 0.93, F1 0.96
+CJ:         precision 0.85, recall 1.00, F1 0.92
+-> 2979 falsos positivos, 0 falsos negativos
+-> Perfil conservador: prefere alertar demais a deixar passar CJ
+-> Acurácia 0.9512 e honesta (VIES reduzido, erros realistas)
+
+4. COMPARACAO COM OUTRAS VERSAOES
+-------------------------------------------------------------
+20k, tsfresh, SVM default:      acc 0.89, 545 FP, 7 FN
+159k, tsfresh, SVM tunado:      acc 0.9999, 0 FP, 1 FN (VIES)
+159k, normalizado + CORAL:      acc 0.9512, 2979 FP, 0 FN (HONESTO)
+
+5. CONCLUSAO PARA O RELATORIO
+-------------------------------------------------------------
+O vies de dominio NAO e eliminavel por engenharia de features
+quando os datasets vem de hardwares diferentes. O CORAL reduz
+o domain classifier de 0.975 para 0.916, e a acuracia cai de
+0.9999 para 0.9512, o que e BOM: mostra que o modelo agora
+comete erros realistas. O perfil de erro (2979 FP, 0 FN) e o
+de um detector conservador, adequado a gateways domesticos.
+A solucao definitiva (documentar como trabalho futuro) seria
+coletar benigno e malicioso dos MESMOS dispositivos.
+=============================================================
