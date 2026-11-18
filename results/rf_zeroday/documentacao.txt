@@ -1,0 +1,79 @@
+=============================================================
+Random Forest com features NumPy: baseline vs 0-day
+=============================================================
+Data: 17/11/2026 | Job ID: 32091 | Node: cluster-node?
+Script: code/artigo/Code/zeroday_rf.py
+Dataset: data/article/article_combined.csv (557.376 bursts)
+
+1. O QUE FOI FEITO
+-------------------------------------------------------------
+- Features extraidas com NumPy (17 estatisticas por burst de 10
+  pacotes) em vez de tsfresh. Objetivo: acelerar a extracao de
+  features, que no tsfresh levava horas.
+- Classificador: Random Forest (200 arvores, class_weight balanced_subsample).
+- Subamostragem: 500.000 bursts por classe no treino.
+- 11 experimentos:
+  * 1 baseline (split aleatorio 80/20)
+  * 4 family holdout (Webmine, WebminePool, MinerGate, AntMining)
+  * 4 device holdout (Server, Laptop, Raspberry, WebOS)
+  * 2 throttle holdout (stealthy, aggressive)
+
+2. RESULTADOS
+-------------------------------------------------------------
+Baseline (split aleatorio): acc 0,997 | acc_mal 0,993
+
+Family holdout:
+  Webmine held-out:     acc 0,910 | acc_mal 0,823 | delta -0,087
+  WebminePool held-out: acc 0,974 | acc_mal 0,949 | delta -0,023
+  MinerGate held-out:   acc 0,777 | acc_mal 0,555 | delta -0,220
+  AntMining held-out:   acc 0,849 | acc_mal 0,701 | delta -0,147
+
+Device holdout:
+  Server held-out:      acc 0,778 | acc_mal 0,557 | delta -0,219
+  Laptop held-out:      acc 0,991 | acc_mal 0,983 | delta -0,006
+  Raspberry held-out:   acc 0,892 | acc_mal 0,785 | delta -0,105
+  WebOS held-out:       acc 0,849 | acc_mal 0,701 | delta -0,147
+
+Throttle holdout:
+  Stealthy held-out:    acc 0,977 | acc_mal 0,958 | delta -0,019
+  Aggressive held-out:  acc 0,987 | acc_mal 0,975 | delta -0,010
+
+3. ACHADO PRINCIPAL
+-------------------------------------------------------------
+O baseline reproduz o "99%" do artigo (Tekiner et al., NDSS 2022).
+Mas quando o modelo e testado em ataques que NUNCA viu (0-day),
+a acuracia cai para 0,555 no pior caso (MinerGate holdout).
+O gap de generalizacao e de 43,8 pontos percentuais.
+
+O artigo reporta apenas split aleatorio, o que esconde esse
+overfitting. Nossa contribuicao e quantificar o gap.
+
+4. CAVEATS / LIMITACOES
+-------------------------------------------------------------
+a) AntMining held-out e WebOS held-out sao o mesmo experimento:
+   o arquivo WebOS_binary.csv e a unica fonte de ambos. Metricas
+   identicas (acc 0,849 | acc_mal 0,701) confirmam.
+
+b) MinerGate held-out e Server held-out sao quase o mesmo:
+   Server representa 123.491/123.546 = 99,96% do MinerGate.
+   Metricas quase identicas (0,777 vs 0,778).
+
+c) Stealthy held-out tem apenas 1.028 bursts (dataset original).
+   Resultado valido mas com intervalo de confianca maior.
+
+d) O dataset benigno publico nao tem atribuicao de device
+   (nomes bulk_*, interactive_*, video_*). O 0-day de device
+   testa "detectar device desconhecido", nao "detectar ataque
+   em device conhecido".
+
+e) Experimentos independentes: 1 baseline + 3 families
+   (webmine, webminepool, minergate~server) + 2 devices
+   (Laptop, Raspberry, WebOS~antmining) + 2 throttles = 8 unicos.
+
+5. ARQUIVOS RELACIONADOS
+-------------------------------------------------------------
+- results/rf_zeroday/rf_zeroday_full.out (log completo)
+- results/rf_zeroday/rf_zeroday_results.csv (tabela final)
+- results/rf_zeroday/rf_zeroday_results.json (mesma tabela em JSON)
+- code/artigo/Code/zeroday_rf.py (script)
+- build_article_dataset.py (extrator NumPy)

@@ -272,6 +272,15 @@ print("df35 -->> {}".format(len(df35.dropna())))
 
 
 def run_process(a,b,x):
+    # Subamostragem para viabilizar os 16 modelos non-default (SVM nao converge em datasets completos)
+    # MAX_PER_CLASS = 27000: cobre 100% dos cenarios pequenos; reduz os grandes
+    # (S0 77k, S1 Server 60k, S2 THR_100 76k, S3 Host 62k, S4 77k) para 30k total
+    MAX_PER_CLASS = 27000
+    n_mal = min(MAX_PER_CLASS, len(a))
+    n_ben = min(MAX_PER_CLASS, len(b))
+    a = a.sample(n=n_mal, random_state=90210)
+    b = b.sample(n=n_ben, random_state=90210)
+    print(f"[SUBSAMPLE] malicious={len(a)}, benign={len(b)}, MAX_PER_CLASS={MAX_PER_CLASS}")
     
     df_malicious = a.copy()
     df_benign    = b.copy()
@@ -373,22 +382,22 @@ def ML_Process(df_ML,x):
     y_train = y_train.ravel()
     dfs = []
     models = [
-        ('SVM-linear-scale-1', SVC(C = 1, kernel = 'linear',gamma ='scale')),
-        ('SVM-poly-scale-1', SVC(C = 1, kernel = 'poly',gamma ='scale')),
-        ('SVM-rbf-scale-1', SVC(C = 1, kernel = 'rbf',gamma ='scale')),
-        ('SVM-sigmoid-scale-1', SVC(C = 1, kernel = 'sigmoid',gamma ='scale')),
-        ('SVM-linear-auto-1', SVC(C = 1, kernel = 'linear',gamma ='auto')),
-        ('SVM-poly-auto-1', SVC(C = 1, kernel = 'poly',gamma ='auto')),
-        ('SVM-rbf-auto-1', SVC(C = 1, kernel = 'rbf',gamma ='auto')),
-        ('SVM-sigmoid-auto-1', SVC(C = 1, kernel = 'sigmoid',gamma ='auto')),
-        ('SVM-linear-scale-2', SVC(C = 2, kernel = 'linear',gamma ='scale')),
-        ('SVM-poly-scale-2', SVC(C = 2, kernel = 'poly',gamma ='scale')),
-        ('SVM-rbf-scale-2', SVC(C = 2, kernel = 'rbf',gamma ='scale')),
-        ('SVM-sigmoid-scale-2', SVC(C = 2, kernel = 'sigmoid',gamma ='scale')),
-        ('SVM-linear-auto-2', SVC(C = 2, kernel = 'linear',gamma ='auto')),
-        ('SVM-poly-auto-2', SVC(C = 2, kernel = 'poly',gamma ='auto')),
-        ('SVM-rbf-auto-2', SVC(C = 2, kernel = 'rbf',gamma ='auto')),
-        ('SVM-sigmoid-auto-2', SVC(C = 2, kernel = 'sigmoid',gamma ='auto'))
+        ('SVM-linear-scale-1', SVC(max_iter=5000, C = 1, kernel = 'linear',gamma ='scale')),
+        ('SVM-poly-scale-1', SVC(max_iter=5000, C = 1, kernel = 'poly',gamma ='scale')),
+        ('SVM-rbf-scale-1', SVC(max_iter=5000, C = 1, kernel = 'rbf',gamma ='scale')),
+        ('SVM-sigmoid-scale-1', SVC(max_iter=5000, C = 1, kernel = 'sigmoid',gamma ='scale')),
+        ('SVM-linear-auto-1', SVC(max_iter=5000, C = 1, kernel = 'linear',gamma ='auto')),
+        ('SVM-poly-auto-1', SVC(max_iter=5000, C = 1, kernel = 'poly',gamma ='auto')),
+        ('SVM-rbf-auto-1', SVC(max_iter=5000, C = 1, kernel = 'rbf',gamma ='auto')),
+        ('SVM-sigmoid-auto-1', SVC(max_iter=5000, C = 1, kernel = 'sigmoid',gamma ='auto')),
+        ('SVM-linear-scale-2', SVC(max_iter=5000, C = 2, kernel = 'linear',gamma ='scale')),
+        ('SVM-poly-scale-2', SVC(max_iter=5000, C = 2, kernel = 'poly',gamma ='scale')),
+        ('SVM-rbf-scale-2', SVC(max_iter=5000, C = 2, kernel = 'rbf',gamma ='scale')),
+        ('SVM-sigmoid-scale-2', SVC(max_iter=5000, C = 2, kernel = 'sigmoid',gamma ='scale')),
+        ('SVM-linear-auto-2', SVC(max_iter=5000, C = 2, kernel = 'linear',gamma ='auto')),
+        ('SVM-poly-auto-2', SVC(max_iter=5000, C = 2, kernel = 'poly',gamma ='auto')),
+        ('SVM-rbf-auto-2', SVC(max_iter=5000, C = 2, kernel = 'rbf',gamma ='auto')),
+        ('SVM-sigmoid-auto-2', SVC(max_iter=5000, C = 2, kernel = 'sigmoid',gamma ='auto'))
             ]
     results = []
     names = []

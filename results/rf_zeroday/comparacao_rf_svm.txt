@@ -1,0 +1,54 @@
+=============================================================
+Comparação RF vs SVM no cenário 0-day
+=============================================================
+Jobs: RF=32091 | LinearSVC no-scaler=32096 | LinearSVC+scaler=32100 | Nystroem+scaler=32101
+
+1. RESULTADOS PRINCIPAIS
+-------------------------------------------------------------
+MinerGate held-out (acc_on_malicious_test):
+  RF 500k:                    0.555
+  LinearSVC 500k no-scaler:   0.193
+  LinearSVC 500k scaler:      0.251
+  LinearSVC 5k scaler:        0.987
+
+Server held-out (acc_on_malicious_test):
+  RF 500k:                    0.557
+  LinearSVC 500k no-scaler:   0.279
+  LinearSVC 500k scaler:      0.354
+  LinearSVC 5k scaler:        0.990
+
+Baseline split aleatório (acc_on_malicious_test):
+  RF 500k:                    0.993
+  LinearSVC 500k no-scaler:   0.965
+  LinearSVC 500k scaler:      0.967
+  LinearSVC 5k scaler:        0.963
+
+2. ACHADO PRINCIPAL
+-------------------------------------------------------------
+O tamanho do treino é o fator que causa o colapso 0-day, não
+o classificador nem a normalização. Reduzir 500k -> 5k melhora
+o MinerGate held-out de 0.251 para 0.987 sem perder acurácia
+no split aleatório (0.967 -> 0.963).
+
+Isso é evidência de que 500k amostras são suficientes para o
+modelo memorizar o fingerprint de PPS/APS do Server, mas não
+para generalizar. O "99%" do artigo (Tekiner et al., 2022) é
+artefato do tamanho do treino: com 27k amostras, o modelo
+está no regime intermediário.
+
+3. NYSTROEM (NÃO CONVERGIU)
+-------------------------------------------------------------
+Nystroem(300)+LinearSVC com StandardScaler também colapsou
+(acc_mal = 0.000 ou 1.000 em todos os holdouts, exceto no
+baseline onde 0.277). O kernel aproximado não captura a
+fronteira RBF com 17 features e 500k amostras. Documentado
+como limitação, não como resultado.
+
+4. ARQUIVOS
+-------------------------------------------------------------
+- results/rf_zeroday/rf_zeroday_results.csv (RF 500k)
+- results/rf_zeroday/svm_zeroday_results_linear_500k.csv (LinearSVC 500k no-scaler e scaler)
+- results/rf_zeroday/svm_zeroday_results_rbf_nys_500k.csv (Nystroem, colapsado)
+- results/rf_zeroday/svm_linear_500k_scaler_full.out (log LinearSVC 500k scaler)
+- results/rf_zeroday/svm_nystroem_500k_scaler_full.out (log Nystroem)
+- code/artigo/Code/zeroday_svm.py

@@ -1,0 +1,354 @@
+[
+  {
+    "tag": "baseline_random_split",
+    "mode": "linear",
+    "C": 1.0,
+    "max_iter": 5000,
+    "n_components": 300,
+    "n_train": 445900,
+    "n_test": 111476,
+    "n_pos_train": 127624,
+    "n_neg_train": 318276,
+    "n_pos_test": 31906,
+    "n_neg_test": 79570,
+    "acc": 0.9663425311277763,
+    "prec": 0.9194326917347,
+    "recall": 0.9671535134457468,
+    "f1": 0.9426895582574693,
+    "roc_auc": 0.9717985886198747,
+    "acc_on_benign_test": 0.9660173432198065,
+    "acc_on_malicious_test": 0.9671535134457468,
+    "train_time_s": 15.266738891601562,
+    "infer_time_s": 0.024435043334960938,
+    "confusion": [
+      [
+        76866,
+        2704
+      ],
+      [
+        1048,
+        30858
+      ]
+    ]
+  },
+  {
+    "tag": "zeroday_family_webmine_heldout",
+    "mode": "linear",
+    "C": 1.0,
+    "max_iter": 5000,
+    "n_components": 300,
+    "n_train": 476029,
+    "n_test": 3554,
+    "n_pos_train": 157753,
+    "n_neg_train": 318276,
+    "n_pos_test": 1777,
+    "n_neg_test": 1777,
+    "acc": 0.9307822172200337,
+    "prec": 0.9653495440729484,
+    "recall": 0.8936409679234665,
+    "f1": 0.9281122150789012,
+    "roc_auc": 0.975746177078527,
+    "acc_on_benign_test": 0.967923466516601,
+    "acc_on_malicious_test": 0.8936409679234665,
+    "train_time_s": 16.90982484817505,
+    "infer_time_s": 0.0031473636627197266,
+    "confusion": [
+      [
+        1720,
+        57
+      ],
+      [
+        189,
+        1588
+      ]
+    ]
+  },
+  {
+    "tag": "zeroday_family_webminepool_heldout",
+    "mode": "linear",
+    "C": 1.0,
+    "max_iter": 5000,
+    "n_components": 300,
+    "n_train": 447916,
+    "n_test": 59780,
+    "n_pos_train": 129640,
+    "n_neg_train": 318276,
+    "n_pos_test": 29890,
+    "n_neg_test": 29890,
+    "acc": 0.7960020073603212,
+    "prec": 0.9574006100398077,
+    "recall": 0.6195717631314821,
+    "f1": 0.7523002863932728,
+    "roc_auc": 0.7184228521194196,
+    "acc_on_benign_test": 0.9724322515891602,
+    "acc_on_malicious_test": 0.6195717631314821,
+    "train_time_s": 17.283241748809814,
+    "infer_time_s": 0.007265567779541016,
+    "confusion": [
+      [
+        29066,
+        824
+      ],
+      [
+        11371,
+        18519
+      ]
+    ]
+  },
+  {
+    "tag": "zeroday_family_minergate_heldout",
+    "mode": "linear",
+    "C": 1.0,
+    "max_iter": 5000,
+    "n_components": 300,
+    "n_train": 354260,
+    "n_test": 159140,
+    "n_pos_train": 35984,
+    "n_neg_train": 318276,
+    "n_pos_test": 79570,
+    "n_neg_test": 79570,
+    "acc": 0.6155272087470152,
+    "prec": 0.9249295058475477,
+    "recall": 0.2514641196430816,
+    "f1": 0.3954230605812081,
+    "roc_auc": 0.9551020183593638,
+    "acc_on_benign_test": 0.9795902978509489,
+    "acc_on_malicious_test": 0.2514641196430816,
+    "train_time_s": 10.697835683822632,
+    "infer_time_s": 0.015283823013305664,
+    "confusion": [
+      [
+        77946,
+        1624
+      ],
+      [
+        59561,
+        20009
+      ]
+    ]
+  },
+  {
+    "tag": "zeroday_family_antmining_heldout",
+    "mode": "linear",
+    "C": 1.0,
+    "max_iter": 5000,
+    "n_components": 300,
+    "n_train": 473489,
+    "n_test": 8634,
+    "n_pos_train": 155213,
+    "n_neg_train": 318276,
+    "n_pos_test": 4317,
+    "n_neg_test": 4317,
+    "acc": 0.9397729905026639,
+    "prec": 0.9652046067140406,
+    "recall": 0.9124391938846421,
+    "f1": 0.9380804953560371,
+    "roc_auc": 0.9773903228231453,
+    "acc_on_benign_test": 0.9671067871206857,
+    "acc_on_malicious_test": 0.9124391938846421,
+    "train_time_s": 13.540918588638306,
+    "infer_time_s": 0.003814220428466797,
+    "confusion": [
+      [
+        4175,
+        142
+      ],
+      [
+        378,
+        3939
+      ]
+    ]
+  },
+  {
+    "tag": "zeroday_device_Server_heldout",
+    "mode": "linear",
+    "C": 1.0,
+    "max_iter": 5000,
+    "n_components": 300,
+    "n_train": 354315,
+    "n_test": 159140,
+    "n_pos_train": 36039,
+    "n_neg_train": 318276,
+    "n_pos_test": 79570,
+    "n_neg_test": 79570,
+    "acc": 0.6672426794017846,
+    "prec": 0.9483507968060375,
+    "recall": 0.35375141384944075,
+    "f1": 0.5152904778903625,
+    "roc_auc": 0.9675894496636905,
+    "acc_on_benign_test": 0.9807339449541285,
+    "acc_on_malicious_test": 0.35375141384944075,
+    "train_time_s": 13.35475754737854,
+    "infer_time_s": 0.013158559799194336,
+    "confusion": [
+      [
+        78037,
+        1533
+      ],
+      [
+        51422,
+        28148
+      ]
+    ]
+  },
+  {
+    "tag": "zeroday_device_Laptop_heldout",
+    "mode": "linear",
+    "C": 1.0,
+    "max_iter": 5000,
+    "n_components": 300,
+    "n_train": 454317,
+    "n_test": 46978,
+    "n_pos_train": 136041,
+    "n_neg_train": 318276,
+    "n_pos_test": 23489,
+    "n_neg_test": 23489,
+    "acc": 0.8159564051258036,
+    "prec": 0.9569607782771997,
+    "recall": 0.6616714206649921,
+    "f1": 0.7823810722376038,
+    "roc_auc": 0.7565951328849079,
+    "acc_on_benign_test": 0.970241389586615,
+    "acc_on_malicious_test": 0.6616714206649921,
+    "train_time_s": 19.561854124069214,
+    "infer_time_s": 0.007691860198974609,
+    "confusion": [
+      [
+        22790,
+        699
+      ],
+      [
+        7947,
+        15542
+      ]
+    ]
+  },
+  {
+    "tag": "zeroday_device_Raspberry_heldout",
+    "mode": "linear",
+    "C": 1.0,
+    "max_iter": 5000,
+    "n_components": 300,
+    "n_train": 469573,
+    "n_test": 16466,
+    "n_pos_train": 151297,
+    "n_neg_train": 318276,
+    "n_pos_test": 8233,
+    "n_neg_test": 8233,
+    "acc": 0.9358678489007652,
+    "prec": 0.9633311814073596,
+    "recall": 0.9062310214988462,
+    "f1": 0.9339091250469396,
+    "roc_auc": 0.983636315380261,
+    "acc_on_benign_test": 0.9655046763026843,
+    "acc_on_malicious_test": 0.9062310214988462,
+    "train_time_s": 14.774407625198364,
+    "infer_time_s": 0.003030538558959961,
+    "confusion": [
+      [
+        7949,
+        284
+      ],
+      [
+        772,
+        7461
+      ]
+    ]
+  },
+  {
+    "tag": "zeroday_device_WebOS_heldout",
+    "mode": "linear",
+    "C": 1.0,
+    "max_iter": 5000,
+    "n_components": 300,
+    "n_train": 473489,
+    "n_test": 8634,
+    "n_pos_train": 155213,
+    "n_neg_train": 318276,
+    "n_pos_test": 4317,
+    "n_neg_test": 4317,
+    "acc": 0.9397729905026639,
+    "prec": 0.9652046067140406,
+    "recall": 0.9124391938846421,
+    "f1": 0.9380804953560371,
+    "roc_auc": 0.9773903228231453,
+    "acc_on_benign_test": 0.9671067871206857,
+    "acc_on_malicious_test": 0.9124391938846421,
+    "train_time_s": 13.73241138458252,
+    "infer_time_s": 0.002681255340576172,
+    "confusion": [
+      [
+        4175,
+        142
+      ],
+      [
+        378,
+        3939
+      ]
+    ]
+  },
+  {
+    "tag": "zeroday_throttle_stealthy_heldout",
+    "mode": "linear",
+    "C": 1.0,
+    "max_iter": 5000,
+    "n_components": 300,
+    "n_train": 476778,
+    "n_test": 2056,
+    "n_pos_train": 158502,
+    "n_neg_train": 318276,
+    "n_pos_test": 1028,
+    "n_neg_test": 1028,
+    "acc": 0.9785992217898832,
+    "prec": 0.963276836158192,
+    "recall": 0.995136186770428,
+    "f1": 0.9789473684210527,
+    "roc_auc": 0.9938038426017048,
+    "acc_on_benign_test": 0.9620622568093385,
+    "acc_on_malicious_test": 0.995136186770428,
+    "train_time_s": 18.631155014038086,
+    "infer_time_s": 0.0021588802337646484,
+    "confusion": [
+      [
+        989,
+        39
+      ],
+      [
+        5,
+        1023
+      ]
+    ]
+  },
+  {
+    "tag": "zeroday_throttle_aggressive_heldout",
+    "mode": "linear",
+    "C": 1.0,
+    "max_iter": 5000,
+    "n_components": 300,
+    "n_train": 450145,
+    "n_test": 55322,
+    "n_pos_train": 131869,
+    "n_neg_train": 318276,
+    "n_pos_test": 27661,
+    "n_neg_test": 27661,
+    "acc": 0.750009037995734,
+    "prec": 0.9501399466250081,
+    "recall": 0.5277104949206464,
+    "f1": 0.67855150613611,
+    "roc_auc": 0.639359549553481,
+    "acc_on_benign_test": 0.9723075810708217,
+    "acc_on_malicious_test": 0.5277104949206464,
+    "train_time_s": 19.269026279449463,
+    "infer_time_s": 0.006010293960571289,
+    "confusion": [
+      [
+        26895,
+        766
+      ],
+      [
+        13064,
+        14597
+      ]
+    ]
+  }
+]
