@@ -163,7 +163,3 @@ Documentadas em detalhe no relatório (Seção VIII) e no
   year={2022}
 }
 ```
-
-## Licença
-
-MIT (ver LICENSE).
