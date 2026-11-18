@@ -66,3 +66,27 @@ O SVM do artigo (Tekiner et al., NDSS 2022) e a escolha
 correta para robustez 0-day; o RF e a escolha correta para
 throughput. A escolha do artigo e defensavel.
 ================================================================
+
+7. PROVA EXPERIMENTAL DO BUG: CURVA DE "APRENDIZADO" (job 32137, curve2)
+-------------------------------------------------------------
+O experimento curve2 variou MAX_PER_CLASS de 25k a 500k e
+mediu o gap de 0-day do RF para MinerGate. Os resultados
+são a assinatura direta do bug de balanceamento:
+
+  MAX    pos_train  neg_train  ratio   baseline  minergate  delta
+  -------------------------------------------------------------
+  25k    25000      25000      1.00    0.9939    0.9553     -2.1pp
+  50k    35984      50000      1.39    0.9945    0.9367     -2.9pp
+  100k   35984      100000     2.78    0.9953    0.8734     -6.1pp
+  250k   35984      250000     6.95    0.9937    0.6272     -18.3pp
+  500k   35984      318276     8.85    0.9930    0.5548     -22.0pp
+
+A relação ratio <-> delta_acc_mal e monotona e deterministica.
+O "gap de 0-day" NAO e uma propriedade do problema: e uma
+funcao do desbalanceamento produzido pelo subsample_balanced
+quebrado. Em condicoes balanceadas (N=25k, ratio 1:1), o gap
+real e de 2,1 pp -- nao 22 pp, nao 44 pp.
+
+Conclusao: o valor correto para reportar no paper como
+"0-day gap do RF balanceado" e 2,1 pp (N=25k), nao os 44 pp
+que apareceram na primeira versao deste trabalho.
