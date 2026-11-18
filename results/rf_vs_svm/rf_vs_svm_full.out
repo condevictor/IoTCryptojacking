@@ -1,0 +1,50 @@
+loaded 557376 bursts | pos=159530 neg=397846
+throttle: {'none': 525709, 'aggressive': 27661, 'robust': 2978, 'stealthy': 1028}
+
+===== MODELO: RF =====
+[rf:baseline] acc=0.9920 acc_mal=0.9937 train=2.0s infer=1.55µs/sample
+[rf:zeroday_family_webmine_heldout] acc=0.9086 acc_mal=0.8244 train=1.9s infer=28.55µs/sample n_sv=0
+[rf:zeroday_family_webminepool_heldout] acc=0.9846 acc_mal=0.9745 train=1.9s infer=1.94µs/sample n_sv=0
+[rf:zeroday_family_minergate_heldout] acc=0.9728 acc_mal=0.9569 train=1.8s infer=1.41µs/sample n_sv=0
+[rf:zeroday_family_antmining_heldout] acc=0.8947 acc_mal=0.7943 train=1.9s infer=12.07µs/sample n_sv=0
+[rf:zeroday_device_Laptop_heldout] acc=0.9892 acc_mal=0.9850 train=2.0s infer=2.71µs/sample n_sv=0
+[rf:zeroday_device_Raspberry_heldout] acc=0.9344 acc_mal=0.8744 train=1.9s infer=7.13µs/sample n_sv=0
+[rf:zeroday_throttle_stealthy_heldout] acc=0.9684 acc_mal=0.9465 train=1.9s infer=38.66µs/sample n_sv=0
+[rf:zeroday_throttle_aggressive_heldout] acc=0.9860 acc_mal=0.9777 train=1.9s infer=1.85µs/sample n_sv=0
+
+===== MODELO: SVM =====
+[svm:baseline] acc=0.9821 acc_mal=0.9937 train=0.8s infer=55.73µs/sample
+[svm:zeroday_family_webmine_heldout] acc=0.9240 acc_mal=0.8683 train=0.8s infer=60.47µs/sample n_sv=930
+[svm:zeroday_family_webminepool_heldout] acc=0.9838 acc_mal=0.9854 train=0.8s infer=48.34µs/sample n_sv=768
+[svm:zeroday_family_minergate_heldout] acc=0.9844 acc_mal=0.9994 train=1.6s infer=113.43µs/sample n_sv=1805
+[svm:zeroday_family_antmining_heldout] acc=0.9450 acc_mal=0.9110 train=0.8s infer=58.10µs/sample n_sv=926
+[svm:zeroday_device_Laptop_heldout] acc=0.9885 acc_mal=0.9946 train=0.9s infer=51.21µs/sample n_sv=801
+[svm:zeroday_device_Raspberry_heldout] acc=0.9685 acc_mal=0.9603 train=0.9s infer=63.69µs/sample n_sv=1009
+[svm:zeroday_throttle_stealthy_heldout] acc=0.9844 acc_mal=0.9893 train=0.9s infer=62.56µs/sample n_sv=969
+[svm:zeroday_throttle_aggressive_heldout] acc=0.9856 acc_mal=0.9886 train=0.8s infer=49.52µs/sample n_sv=787
+
+=== ACC_MAL (0-day detection rate) ===
+model                                      rf       svm
+tag                                                    
+baseline_random_split                0.993700  0.993669
+zeroday_device_Laptop_heldout        0.984972  0.994636
+zeroday_device_Raspberry_heldout     0.874408  0.960282
+zeroday_family_antmining_heldout     0.794302  0.911049
+zeroday_family_minergate_heldout     0.956931  0.999359
+zeroday_family_webmine_heldout       0.824423  0.868317
+zeroday_family_webminepool_heldout   0.974473  0.985447
+zeroday_throttle_aggressive_heldout  0.977694  0.988576
+zeroday_throttle_stealthy_heldout    0.946498  0.989300
+
+=== INFER µs/sample ===
+model                                       rf         svm
+tag                                                       
+baseline_random_split                 1.545972   55.727195
+zeroday_device_Laptop_heldout         2.713708   51.206335
+zeroday_device_Raspberry_heldout      7.125524   63.686850
+zeroday_family_antmining_heldout     12.065156   58.100597
+zeroday_family_minergate_heldout      1.410858  113.428649
+zeroday_family_webmine_heldout       28.548109   60.468828
+zeroday_family_webminepool_heldout    1.941919   48.342581
+zeroday_throttle_aggressive_heldout   1.854051   49.515391
+zeroday_throttle_stealthy_heldout    38.661961   62.560989

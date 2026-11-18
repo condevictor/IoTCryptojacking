@@ -1,0 +1,470 @@
+[
+  {
+    "model": "rf",
+    "tag": "baseline_random_split",
+    "n_train": 20000,
+    "n_test": 111476,
+    "n_sv": 0,
+    "acc": 0.9920341598191539,
+    "prec": 0.9787910595208693,
+    "recall": 0.9937002444681251,
+    "f1": 0.9861893060437339,
+    "roc_auc": 0.9994601682422635,
+    "acc_on_malicious_test": 0.9937002444681251,
+    "train_time_s": 1.9928066730499268,
+    "infer_time_s": 0.17233872413635254,
+    "infer_us_per_sample": 1.5459715466679154,
+    "confusion": [
+      [
+        78883,
+        687
+      ],
+      [
+        201,
+        31705
+      ]
+    ]
+  },
+  {
+    "model": "rf",
+    "tag": "zeroday_family_webmine_heldout",
+    "n_train": 20000,
+    "n_test": 3554,
+    "n_sv": 0,
+    "acc": 0.9085537422622397,
+    "prec": 0.9912043301759134,
+    "recall": 0.8244231851435003,
+    "f1": 0.9001536098310292,
+    "roc_auc": 0.9672606483963633,
+    "acc_on_malicious_test": 0.8244231851435003,
+    "train_time_s": 1.9190802574157715,
+    "infer_time_s": 0.10145998001098633,
+    "infer_us_per_sample": 28.54810917585434,
+    "confusion": [
+      [
+        1764,
+        13
+      ],
+      [
+        312,
+        1465
+      ]
+    ]
+  },
+  {
+    "model": "rf",
+    "tag": "zeroday_family_webminepool_heldout",
+    "n_train": 20000,
+    "n_test": 59780,
+    "n_sv": 0,
+    "acc": 0.9845935095349615,
+    "prec": 0.9946047464572306,
+    "recall": 0.9744730679156909,
+    "f1": 0.9844359949302915,
+    "roc_auc": 0.9981498274984189,
+    "acc_on_malicious_test": 0.9744730679156909,
+    "train_time_s": 1.9364023208618164,
+    "infer_time_s": 0.1160879135131836,
+    "infer_us_per_sample": 1.9419189279555635,
+    "confusion": [
+      [
+        29732,
+        158
+      ],
+      [
+        763,
+        29127
+      ]
+    ]
+  },
+  {
+    "model": "rf",
+    "tag": "zeroday_family_minergate_heldout",
+    "n_train": 20000,
+    "n_test": 159140,
+    "n_sv": 0,
+    "acc": 0.9727975367600855,
+    "prec": 0.9882925562982673,
+    "recall": 0.9569310041472917,
+    "f1": 0.972358969447371,
+    "roc_auc": 0.9966573975782139,
+    "acc_on_malicious_test": 0.9569310041472917,
+    "train_time_s": 1.7953712940216064,
+    "infer_time_s": 0.22452402114868164,
+    "infer_us_per_sample": 1.410858496598477,
+    "confusion": [
+      [
+        78668,
+        902
+      ],
+      [
+        3427,
+        76143
+      ]
+    ]
+  },
+  {
+    "model": "rf",
+    "tag": "zeroday_family_antmining_heldout",
+    "n_train": 20000,
+    "n_test": 8634,
+    "n_sv": 0,
+    "acc": 0.8947185545517721,
+    "prec": 0.9939130434782608,
+    "recall": 0.7943015983321752,
+    "f1": 0.8829663962920047,
+    "roc_auc": 0.9962171254467513,
+    "acc_on_malicious_test": 0.7943015983321752,
+    "train_time_s": 1.9470670223236084,
+    "infer_time_s": 0.10417056083679199,
+    "infer_us_per_sample": 12.06515645550058,
+    "confusion": [
+      [
+        4296,
+        21
+      ],
+      [
+        888,
+        3429
+      ]
+    ]
+  },
+  {
+    "model": "rf",
+    "tag": "zeroday_device_Laptop_heldout",
+    "n_train": 20000,
+    "n_test": 46978,
+    "n_sv": 0,
+    "acc": 0.989207714249223,
+    "prec": 0.9933877200515243,
+    "recall": 0.9849716888756439,
+    "f1": 0.9891618033733085,
+    "roc_auc": 0.9992959875250991,
+    "acc_on_malicious_test": 0.9849716888756439,
+    "train_time_s": 2.017895460128784,
+    "infer_time_s": 0.12748456001281738,
+    "infer_us_per_sample": 2.7137076932355013,
+    "confusion": [
+      [
+        23335,
+        154
+      ],
+      [
+        353,
+        23136
+      ]
+    ]
+  },
+  {
+    "model": "rf",
+    "tag": "zeroday_device_Raspberry_heldout",
+    "n_train": 20000,
+    "n_test": 16466,
+    "n_sv": 0,
+    "acc": 0.9344103000121462,
+    "prec": 0.9936507936507937,
+    "recall": 0.8744078707639985,
+    "f1": 0.9302235430934229,
+    "roc_auc": 0.9898932448268308,
+    "acc_on_malicious_test": 0.8744078707639985,
+    "train_time_s": 1.8890454769134521,
+    "infer_time_s": 0.11732888221740723,
+    "infer_us_per_sample": 7.125524244953676,
+    "confusion": [
+      [
+        8187,
+        46
+      ],
+      [
+        1034,
+        7199
+      ]
+    ]
+  },
+  {
+    "model": "rf",
+    "tag": "zeroday_throttle_stealthy_heldout",
+    "n_train": 20000,
+    "n_test": 2056,
+    "n_sv": 0,
+    "acc": 0.9683852140077821,
+    "prec": 0.9898270600203459,
+    "recall": 0.9464980544747081,
+    "f1": 0.9676777722526106,
+    "roc_auc": 0.9975155755575407,
+    "acc_on_malicious_test": 0.9464980544747081,
+    "train_time_s": 1.8876640796661377,
+    "infer_time_s": 0.07948899269104004,
+    "infer_us_per_sample": 38.66196142560313,
+    "confusion": [
+      [
+        1018,
+        10
+      ],
+      [
+        55,
+        973
+      ]
+    ]
+  },
+  {
+    "model": "rf",
+    "tag": "zeroday_throttle_aggressive_heldout",
+    "n_train": 20000,
+    "n_test": 55322,
+    "n_sv": 0,
+    "acc": 0.9860091826036658,
+    "prec": 0.9942281533767141,
+    "recall": 0.977694226528325,
+    "f1": 0.9858918741569757,
+    "roc_auc": 0.9983858533669168,
+    "acc_on_malicious_test": 0.977694226528325,
+    "train_time_s": 1.8673784732818604,
+    "infer_time_s": 0.1025698184967041,
+    "infer_us_per_sample": 1.854051164034274,
+    "confusion": [
+      [
+        27504,
+        157
+      ],
+      [
+        617,
+        27044
+      ]
+    ]
+  },
+  {
+    "model": "svm",
+    "tag": "baseline_random_split",
+    "n_train": 20000,
+    "n_test": 111476,
+    "n_sv": 885,
+    "acc": 0.9821127417560731,
+    "prec": 0.9465010747551946,
+    "recall": 0.9936689024008024,
+    "f1": 0.9695116357297942,
+    "roc_auc": 0.9959819449997571,
+    "acc_on_malicious_test": 0.9936689024008024,
+    "train_time_s": 0.8104357719421387,
+    "infer_time_s": 6.212244749069214,
+    "infer_us_per_sample": 55.727194634443414,
+    "confusion": [
+      [
+        77778,
+        1792
+      ],
+      [
+        202,
+        31704
+      ]
+    ]
+  },
+  {
+    "model": "svm",
+    "tag": "zeroday_family_webmine_heldout",
+    "n_train": 20000,
+    "n_test": 3554,
+    "n_sv": 930,
+    "acc": 0.9240292628024761,
+    "prec": 0.9772007599746675,
+    "recall": 0.8683173888576252,
+    "f1": 0.9195470798569726,
+    "roc_auc": 0.9572490229528879,
+    "acc_on_malicious_test": 0.8683173888576252,
+    "train_time_s": 0.8395402431488037,
+    "infer_time_s": 0.2149062156677246,
+    "infer_us_per_sample": 60.468828268915196,
+    "confusion": [
+      [
+        1741,
+        36
+      ],
+      [
+        234,
+        1543
+      ]
+    ]
+  },
+  {
+    "model": "svm",
+    "tag": "zeroday_family_webminepool_heldout",
+    "n_train": 20000,
+    "n_test": 59780,
+    "n_sv": 768,
+    "acc": 0.983773837403814,
+    "prec": 0.98216072024008,
+    "recall": 0.985446637671462,
+    "f1": 0.9838009352037408,
+    "roc_auc": 0.9852835516778875,
+    "acc_on_malicious_test": 0.985446637671462,
+    "train_time_s": 0.7980279922485352,
+    "infer_time_s": 2.8899195194244385,
+    "infer_us_per_sample": 48.34258145574504,
+    "confusion": [
+      [
+        29355,
+        535
+      ],
+      [
+        435,
+        29455
+      ]
+    ]
+  },
+  {
+    "model": "svm",
+    "tag": "zeroday_family_minergate_heldout",
+    "n_train": 20000,
+    "n_test": 159140,
+    "n_sv": 1805,
+    "acc": 0.9843785346236018,
+    "prec": 0.9702882104595261,
+    "recall": 0.999359054920196,
+    "f1": 0.9846090983383274,
+    "roc_auc": 0.9948662876268981,
+    "acc_on_malicious_test": 0.999359054920196,
+    "train_time_s": 1.585538625717163,
+    "infer_time_s": 18.051035165786743,
+    "infer_us_per_sample": 113.42864877332376,
+    "confusion": [
+      [
+        77135,
+        2435
+      ],
+      [
+        51,
+        79519
+      ]
+    ]
+  },
+  {
+    "model": "svm",
+    "tag": "zeroday_family_antmining_heldout",
+    "n_train": 20000,
+    "n_test": 8634,
+    "n_sv": 926,
+    "acc": 0.9449849432476257,
+    "prec": 0.9773856858846919,
+    "recall": 0.911049339819319,
+    "f1": 0.9430523917995444,
+    "roc_auc": 0.9783077703101695,
+    "acc_on_malicious_test": 0.911049339819319,
+    "train_time_s": 0.8270883560180664,
+    "infer_time_s": 0.5016405582427979,
+    "infer_us_per_sample": 58.100597433726875,
+    "confusion": [
+      [
+        4226,
+        91
+      ],
+      [
+        384,
+        3933
+      ]
+    ]
+  },
+  {
+    "model": "svm",
+    "tag": "zeroday_device_Laptop_heldout",
+    "n_train": 20000,
+    "n_test": 46978,
+    "n_sv": 801,
+    "acc": 0.9884839712205713,
+    "prec": 0.9825468920851207,
+    "recall": 0.9946357869641108,
+    "f1": 0.9885543825501936,
+    "roc_auc": 0.9885860105904355,
+    "acc_on_malicious_test": 0.9946357869641108,
+    "train_time_s": 0.8824584484100342,
+    "infer_time_s": 2.405571222305298,
+    "infer_us_per_sample": 51.20633535495972,
+    "confusion": [
+      [
+        23074,
+        415
+      ],
+      [
+        126,
+        23363
+      ]
+    ]
+  },
+  {
+    "model": "svm",
+    "tag": "zeroday_device_Raspberry_heldout",
+    "n_train": 20000,
+    "n_test": 16466,
+    "n_sv": 1009,
+    "acc": 0.9685412364873072,
+    "prec": 0.9764110164258367,
+    "recall": 0.960281792785133,
+    "f1": 0.9682792406613595,
+    "roc_auc": 0.9846654780277485,
+    "acc_on_malicious_test": 0.960281792785133,
+    "train_time_s": 0.8903341293334961,
+    "infer_time_s": 1.0486676692962646,
+    "infer_us_per_sample": 63.68684982972578,
+    "confusion": [
+      [
+        8042,
+        191
+      ],
+      [
+        327,
+        7906
+      ]
+    ]
+  },
+  {
+    "model": "svm",
+    "tag": "zeroday_throttle_stealthy_heldout",
+    "n_train": 20000,
+    "n_test": 2056,
+    "n_sv": 969,
+    "acc": 0.9844357976653697,
+    "prec": 0.9797687861271677,
+    "recall": 0.9892996108949417,
+    "f1": 0.9845111326234269,
+    "roc_auc": 0.9959168571817892,
+    "acc_on_malicious_test": 0.9892996108949417,
+    "train_time_s": 0.8764162063598633,
+    "infer_time_s": 0.12862539291381836,
+    "infer_us_per_sample": 62.56098877131244,
+    "confusion": [
+      [
+        1007,
+        21
+      ],
+      [
+        11,
+        1017
+      ]
+    ]
+  },
+  {
+    "model": "svm",
+    "tag": "zeroday_throttle_aggressive_heldout",
+    "n_train": 20000,
+    "n_test": 55322,
+    "n_sv": 787,
+    "acc": 0.9855572828169625,
+    "prec": 0.9826433807675722,
+    "recall": 0.9885759733921405,
+    "f1": 0.9856007496981384,
+    "roc_auc": 0.9861597581415745,
+    "acc_on_malicious_test": 0.9885759733921405,
+    "train_time_s": 0.8190772533416748,
+    "infer_time_s": 2.739290475845337,
+    "infer_us_per_sample": 49.51539127011563,
+    "confusion": [
+      [
+        27178,
+        483
+      ],
+      [
+        316,
+        27345
+      ]
+    ]
+  }
+]

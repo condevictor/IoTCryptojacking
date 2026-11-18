@@ -25,7 +25,9 @@ def load_pool(paths):
     df['Label']         = df['Label'].astype(int)
     return df
 
-def subsample_balanced(df, max_per_class=MAX_PER_CLASS, seed=RNG):
+def subsample_balanced(df, max_per_class=None, seed=RNG):
+    if max_per_class is None:
+        max_per_class = MAX_PER_CLASS
     pos = df[df['Label']==1]; neg = df[df['Label']==0]
     pos_s = pos.sample(n=min(max_per_class, len(pos)), random_state=seed)
     neg_s = neg.sample(n=min(max_per_class, len(neg)), random_state=seed)
@@ -94,8 +96,11 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--csv', nargs='+', required=True)
     ap.add_argument('--out', default='results/rf_zeroday')
+    ap.add_argument('--max-per-class', type=int, default=500_000)
     ap.add_argument('--discover', action='store_true')
     args = ap.parse_args()
+    global MAX_PER_CLASS
+    MAX_PER_CLASS = args.max_per_class
     os.makedirs(args.out, exist_ok=True)
     df = load_pool(args.csv)
     print(f"loaded {len(df)} bursts | pos={int((df['Label']==1).sum())} neg={int((df['Label']==0).sum())}")
