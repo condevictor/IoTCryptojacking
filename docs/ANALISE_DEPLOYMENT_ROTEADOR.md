@@ -28,7 +28,7 @@ Portanto: o setup do paper é **máquina acoplada**, não **modelo no router**.
 |---|---|
 | Hardware | MIPS 750 MHz, 128 MB RAM, OpenWRT |
 | Runtime Python/sklearn | Inviável — precisa exportar para C |
-| RF podado (50 árvores, prof 15) | Viável (~25 KB, 5-50 us/amostra) |
+| RF podado (50 árvores, prof 15) | Viável (~300-400 KB compilado, 0,8-13 us/amostra) |
 | SVM RBF (885-1805 SVs) | Inviável (kernel RBF em C é raro; 0,5-5 ms/amostra) |
 | FPR baixo importa | Sim — usuário doméstico não faz triagem |
 | **Modelo recomendado** | **RF com poda + m2cgen para C** |
@@ -86,3 +86,19 @@ do artigo é defensável.
 - Job 32143: ../../results/rf_vs_svm/rf_vs_svm_zeroday.csv
 - Job 32137 (curva do bug): ../../results/rf_zeroday/ERRATUM.txt
 - RF podado (se rodado): ../../results/rf_pruned/rf_pruned_results.csv
+
+## ⚠️ Correção: tamanho real do modelo exportado (m2cgen)
+
+Medição feita em 18/11/2026:
+  Pickle (sklearn):  1.235,6 KB
+  C source (m2cgen): 1.952,6 KB
+  C compilado MIPS:  ~280-440 KB (estimativa baseada em ~20 bytes/nó)
+
+O modelo NÃO cabe em "~25 KB" como afirmado em versões anteriores.
+Cabe em ~300-400 KB compilado, o que ainda é VIÁVEL no Archer C7 v5
+(16 MB flash, ~4-8 MB livres após OpenWRT), mas ocupa ~5% do flash
+disponível — não é "tiny".
+
+Para deployment ainda menor, reduzir para 25 árvores / prof 10
+(estimativa: ~140 KB compilado, perda de acurácia a medir) ou
+15 árvores / prof 8 (~60 KB, perda maior).
