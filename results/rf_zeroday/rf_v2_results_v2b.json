@@ -1,0 +1,794 @@
+[
+  {
+    "tag": "baseline_random_split",
+    "augmentation": "ratios_dup3",
+    "n_features_used": 50,
+    "n_train": 445900,
+    "n_test": 111476,
+    "n_pos_train": 127624,
+    "n_neg_train": 318276,
+    "n_pos_test": 31906,
+    "n_neg_test": 79570,
+    "acc": 0.996205461265205,
+    "prec": 0.9941300185202624,
+    "recall": 0.9926032721118285,
+    "f1": 0.9933660586860719,
+    "roc_auc": 0.9997676765813136,
+    "acc_on_benign_test": 0.9976498680407189,
+    "acc_on_malicious_test": 0.9926032721118285,
+    "train_time_s": 116.80931496620178,
+    "infer_time_s": 0.5441398620605469,
+    "top10_importances": [
+      [
+        "len_per_iat",
+        0.23515704768152862
+      ],
+      [
+        "len_max",
+        0.10967502019832104
+      ],
+      [
+        "len_min_max_ratio",
+        0.07830453174801319
+      ],
+      [
+        "dur_per_pkt",
+        0.07574110870994558
+      ],
+      [
+        "len_mean",
+        0.07508621730020071
+      ],
+      [
+        "len_sum",
+        0.05658599323267143
+      ],
+      [
+        "iat_sum",
+        0.04263682574422979
+      ],
+      [
+        "len_median",
+        0.03965707232866311
+      ],
+      [
+        "len_range",
+        0.03929517210950709
+      ],
+      [
+        "iat_mean",
+        0.03552610428892178
+      ]
+    ],
+    "confusion": [
+      [
+        79383,
+        187
+      ],
+      [
+        236,
+        31670
+      ]
+    ]
+  },
+  {
+    "tag": "zeroday_family_webmine_heldout",
+    "augmentation": "ratios_dup3",
+    "n_features_used": 50,
+    "n_train": 476029,
+    "n_test": 3554,
+    "n_pos_train": 157753,
+    "n_neg_train": 318276,
+    "n_pos_test": 1777,
+    "n_neg_test": 1777,
+    "acc": 0.9082723691615081,
+    "prec": 0.9958988380041012,
+    "recall": 0.8199212155317952,
+    "f1": 0.8993827160493827,
+    "roc_auc": 0.9834048456976516,
+    "acc_on_benign_test": 0.9966235227912211,
+    "acc_on_malicious_test": 0.8199212155317952,
+    "train_time_s": 124.26890993118286,
+    "infer_time_s": 0.2111051082611084,
+    "top10_importances": [
+      [
+        "len_per_iat",
+        0.23451742166901174
+      ],
+      [
+        "len_max",
+        0.12518229378993537
+      ],
+      [
+        "dur_per_pkt",
+        0.08976140412086772
+      ],
+      [
+        "len_min_max_ratio",
+        0.07946930130160622
+      ],
+      [
+        "len_mean",
+        0.07672252460326193
+      ],
+      [
+        "len_sum",
+        0.05104180892015086
+      ],
+      [
+        "len_median",
+        0.04093504062702112
+      ],
+      [
+        "burst_duration",
+        0.03595690166331438
+      ],
+      [
+        "len_range",
+        0.03439826192399965
+      ],
+      [
+        "iat_mean",
+        0.028614248726097948
+      ]
+    ],
+    "confusion": [
+      [
+        1771,
+        6
+      ],
+      [
+        320,
+        1457
+      ]
+    ]
+  },
+  {
+    "tag": "zeroday_family_webminepool_heldout",
+    "augmentation": "ratios_dup3",
+    "n_features_used": 50,
+    "n_train": 447916,
+    "n_test": 59780,
+    "n_pos_train": 129640,
+    "n_neg_train": 318276,
+    "n_pos_test": 29890,
+    "n_neg_test": 29890,
+    "acc": 0.9829876212780194,
+    "prec": 0.9978618477773563,
+    "recall": 0.9680495148879223,
+    "f1": 0.9827296347241327,
+    "roc_auc": 0.9988605297600066,
+    "acc_on_benign_test": 0.9979257276681164,
+    "acc_on_malicious_test": 0.9680495148879223,
+    "train_time_s": 127.17428922653198,
+    "infer_time_s": 0.2563028335571289,
+    "top10_importances": [
+      [
+        "len_per_iat",
+        0.3078435553900621
+      ],
+      [
+        "dur_per_pkt",
+        0.11876766434144496
+      ],
+      [
+        "len_max",
+        0.11365761614239174
+      ],
+      [
+        "len_mean",
+        0.08749275645133069
+      ],
+      [
+        "len_sum",
+        0.04609044118891118
+      ],
+      [
+        "len_median",
+        0.04545554367117302
+      ],
+      [
+        "burst_duration",
+        0.042816149399295775
+      ],
+      [
+        "pps_burst",
+        0.04224734651537217
+      ],
+      [
+        "iat_mean",
+        0.037833053173044036
+      ],
+      [
+        "iat_sum",
+        0.03308839434846714
+      ]
+    ],
+    "confusion": [
+      [
+        29828,
+        62
+      ],
+      [
+        955,
+        28935
+      ]
+    ]
+  },
+  {
+    "tag": "zeroday_family_minergate_heldout",
+    "augmentation": "ratios_dup3",
+    "n_features_used": 50,
+    "n_train": 354260,
+    "n_test": 159140,
+    "n_pos_train": 35984,
+    "n_neg_train": 318276,
+    "n_pos_test": 79570,
+    "n_neg_test": 79570,
+    "acc": 0.7891981902727159,
+    "prec": 0.9977073645506651,
+    "recall": 0.5797285409073771,
+    "f1": 0.7333412821429991,
+    "roc_auc": 0.9981295533778084,
+    "acc_on_benign_test": 0.9986678396380545,
+    "acc_on_malicious_test": 0.5797285409073771,
+    "train_time_s": 68.80514311790466,
+    "infer_time_s": 0.684581995010376,
+    "top10_importances": [
+      [
+        "len_range_norm",
+        0.2214858966096426
+      ],
+      [
+        "pps_per_byte",
+        0.1407578664583225
+      ],
+      [
+        "len_max",
+        0.10719738812859408
+      ],
+      [
+        "len_min_max_ratio",
+        0.10444804584821638
+      ],
+      [
+        "len_per_iat",
+        0.07666529036484152
+      ],
+      [
+        "len_range",
+        0.04854611822375258
+      ],
+      [
+        "len_mean",
+        0.038297167522907606
+      ],
+      [
+        "len_sum",
+        0.035706333366778524
+      ],
+      [
+        "len_median",
+        0.034209741149717
+      ],
+      [
+        "len_std",
+        0.03400239453482747
+      ]
+    ],
+    "confusion": [
+      [
+        79464,
+        106
+      ],
+      [
+        33441,
+        46129
+      ]
+    ]
+  },
+  {
+    "tag": "zeroday_family_antmining_heldout",
+    "augmentation": "ratios_dup3",
+    "n_features_used": 50,
+    "n_train": 473489,
+    "n_test": 8634,
+    "n_pos_train": 155213,
+    "n_neg_train": 318276,
+    "n_pos_test": 4317,
+    "n_neg_test": 4317,
+    "acc": 0.8381978225619643,
+    "prec": 0.9965986394557823,
+    "recall": 0.6787120685661339,
+    "f1": 0.8074962105553259,
+    "roc_auc": 0.9977818246773842,
+    "acc_on_benign_test": 0.9976835765577947,
+    "acc_on_malicious_test": 0.6787120685661339,
+    "train_time_s": 135.96540474891663,
+    "infer_time_s": 0.25556182861328125,
+    "top10_importances": [
+      [
+        "len_per_iat",
+        0.23450563414559703
+      ],
+      [
+        "len_max",
+        0.11743757069551779
+      ],
+      [
+        "len_mean",
+        0.08371376294553663
+      ],
+      [
+        "dur_per_pkt",
+        0.0823761475934696
+      ],
+      [
+        "len_min_max_ratio",
+        0.07403246493546654
+      ],
+      [
+        "len_sum",
+        0.04909329592300363
+      ],
+      [
+        "burst_duration",
+        0.046109807305599534
+      ],
+      [
+        "len_std",
+        0.042032464454163525
+      ],
+      [
+        "pps_burst",
+        0.036036379111711606
+      ],
+      [
+        "len_range",
+        0.033031498020600354
+      ]
+    ],
+    "confusion": [
+      [
+        4307,
+        10
+      ],
+      [
+        1387,
+        2930
+      ]
+    ]
+  },
+  {
+    "tag": "zeroday_device_Server_heldout",
+    "augmentation": "ratios_dup3",
+    "n_features_used": 50,
+    "n_train": 354315,
+    "n_test": 159140,
+    "n_pos_train": 36039,
+    "n_neg_train": 318276,
+    "n_pos_test": 79570,
+    "n_neg_test": 79570,
+    "acc": 0.784252859117758,
+    "prec": 0.997580077437522,
+    "recall": 0.5698881487997989,
+    "f1": 0.7253851198950618,
+    "roc_auc": 0.9979009012704314,
+    "acc_on_benign_test": 0.998617569435717,
+    "acc_on_malicious_test": 0.5698881487997989,
+    "train_time_s": 65.7264051437378,
+    "infer_time_s": 0.6854071617126465,
+    "top10_importances": [
+      [
+        "len_range_norm",
+        0.2115635509358134
+      ],
+      [
+        "pps_per_byte",
+        0.14373919914481298
+      ],
+      [
+        "len_max",
+        0.09919685933746905
+      ],
+      [
+        "len_min_max_ratio",
+        0.09361437889502844
+      ],
+      [
+        "len_per_iat",
+        0.07972097291585754
+      ],
+      [
+        "len_mean",
+        0.046939478389389236
+      ],
+      [
+        "len_sum",
+        0.04432864076512581
+      ],
+      [
+        "len_range",
+        0.04080766840870197
+      ],
+      [
+        "len_median",
+        0.03948837466976594
+      ],
+      [
+        "dur_per_pkt",
+        0.03737383694895761
+      ]
+    ],
+    "confusion": [
+      [
+        79460,
+        110
+      ],
+      [
+        34224,
+        45346
+      ]
+    ]
+  },
+  {
+    "tag": "zeroday_device_Laptop_heldout",
+    "augmentation": "ratios_dup3",
+    "n_features_used": 50,
+    "n_train": 454317,
+    "n_test": 46978,
+    "n_pos_train": 136041,
+    "n_neg_train": 318276,
+    "n_pos_test": 23489,
+    "n_neg_test": 23489,
+    "acc": 0.9908467793435225,
+    "prec": 0.9974543728696552,
+    "recall": 0.9842053727276597,
+    "f1": 0.9907855826511808,
+    "roc_auc": 0.9996506825625211,
+    "acc_on_benign_test": 0.9974881859593853,
+    "acc_on_malicious_test": 0.9842053727276597,
+    "train_time_s": 129.98223853111267,
+    "infer_time_s": 0.24907350540161133,
+    "top10_importances": [
+      [
+        "len_per_iat",
+        0.30573143261674884
+      ],
+      [
+        "len_max",
+        0.11322423728633316
+      ],
+      [
+        "dur_per_pkt",
+        0.10783165515662141
+      ],
+      [
+        "len_mean",
+        0.08734291739777587
+      ],
+      [
+        "iat_sum",
+        0.055351283564523436
+      ],
+      [
+        "len_sum",
+        0.045533746519425565
+      ],
+      [
+        "len_median",
+        0.04537043262084217
+      ],
+      [
+        "burst_duration",
+        0.042097976072220815
+      ],
+      [
+        "iat_mean",
+        0.03729758715763
+      ],
+      [
+        "pps_burst",
+        0.028267157366825477
+      ]
+    ],
+    "confusion": [
+      [
+        23430,
+        59
+      ],
+      [
+        371,
+        23118
+      ]
+    ]
+  },
+  {
+    "tag": "zeroday_device_Raspberry_heldout",
+    "augmentation": "ratios_dup3",
+    "n_features_used": 50,
+    "n_train": 469573,
+    "n_test": 16466,
+    "n_pos_train": 151297,
+    "n_neg_train": 318276,
+    "n_pos_test": 8233,
+    "n_neg_test": 8233,
+    "acc": 0.9235394145511964,
+    "prec": 0.997574200913242,
+    "recall": 0.8491436900279363,
+    "f1": 0.9173938717931894,
+    "roc_auc": 0.9859343640637453,
+    "acc_on_benign_test": 0.9979351390744564,
+    "acc_on_malicious_test": 0.8491436900279363,
+    "train_time_s": 121.14863443374634,
+    "infer_time_s": 0.28281164169311523,
+    "top10_importances": [
+      [
+        "len_per_iat",
+        0.23093212545179034
+      ],
+      [
+        "len_max",
+        0.11647610453439755
+      ],
+      [
+        "dur_per_pkt",
+        0.0893132210678315
+      ],
+      [
+        "len_mean",
+        0.08344422636602002
+      ],
+      [
+        "len_min_max_ratio",
+        0.07596516611311377
+      ],
+      [
+        "burst_duration",
+        0.049275470390343384
+      ],
+      [
+        "len_sum",
+        0.04528083115217178
+      ],
+      [
+        "len_range",
+        0.03971493391509859
+      ],
+      [
+        "len_std",
+        0.036399176999137875
+      ],
+      [
+        "iat_sum",
+        0.0353132133861309
+      ]
+    ],
+    "confusion": [
+      [
+        8216,
+        17
+      ],
+      [
+        1242,
+        6991
+      ]
+    ]
+  },
+  {
+    "tag": "zeroday_device_WebOS_heldout",
+    "augmentation": "ratios_dup3",
+    "n_features_used": 50,
+    "n_train": 473489,
+    "n_test": 8634,
+    "n_pos_train": 155213,
+    "n_neg_train": 318276,
+    "n_pos_test": 4317,
+    "n_neg_test": 4317,
+    "acc": 0.8381978225619643,
+    "prec": 0.9965986394557823,
+    "recall": 0.6787120685661339,
+    "f1": 0.8074962105553259,
+    "roc_auc": 0.9977818246773842,
+    "acc_on_benign_test": 0.9976835765577947,
+    "acc_on_malicious_test": 0.6787120685661339,
+    "train_time_s": 135.11450457572937,
+    "infer_time_s": 0.2736656665802002,
+    "top10_importances": [
+      [
+        "len_per_iat",
+        0.23450563414559703
+      ],
+      [
+        "len_max",
+        0.11743757069551779
+      ],
+      [
+        "len_mean",
+        0.08371376294553663
+      ],
+      [
+        "dur_per_pkt",
+        0.0823761475934696
+      ],
+      [
+        "len_min_max_ratio",
+        0.07403246493546654
+      ],
+      [
+        "len_sum",
+        0.04909329592300363
+      ],
+      [
+        "burst_duration",
+        0.046109807305599534
+      ],
+      [
+        "len_std",
+        0.042032464454163525
+      ],
+      [
+        "pps_burst",
+        0.036036379111711606
+      ],
+      [
+        "len_range",
+        0.033031498020600354
+      ]
+    ],
+    "confusion": [
+      [
+        4307,
+        10
+      ],
+      [
+        1387,
+        2930
+      ]
+    ]
+  },
+  {
+    "tag": "zeroday_throttle_stealthy_heldout",
+    "augmentation": "ratios_dup3",
+    "n_features_used": 50,
+    "n_train": 476778,
+    "n_test": 2056,
+    "n_pos_train": 158502,
+    "n_neg_train": 318276,
+    "n_pos_test": 1028,
+    "n_neg_test": 1028,
+    "acc": 0.9727626459143969,
+    "prec": 0.9959183673469387,
+    "recall": 0.9494163424124513,
+    "f1": 0.9721115537848606,
+    "roc_auc": 0.9993664741328407,
+    "acc_on_benign_test": 0.9961089494163424,
+    "acc_on_malicious_test": 0.9494163424124513,
+    "train_time_s": 129.95307755470276,
+    "infer_time_s": 0.19840383529663086,
+    "top10_importances": [
+      [
+        "len_per_iat",
+        0.2345020039611701
+      ],
+      [
+        "len_max",
+        0.11790119787660952
+      ],
+      [
+        "len_mean",
+        0.08463896338502243
+      ],
+      [
+        "dur_per_pkt",
+        0.08254892623352145
+      ],
+      [
+        "len_min_max_ratio",
+        0.07287575577409658
+      ],
+      [
+        "len_sum",
+        0.04535922420050618
+      ],
+      [
+        "len_median",
+        0.03996237994203428
+      ],
+      [
+        "len_range",
+        0.03762034332372164
+      ],
+      [
+        "burst_duration",
+        0.03563034076395065
+      ],
+      [
+        "iat_sum",
+        0.03538675827142262
+      ]
+    ],
+    "confusion": [
+      [
+        1024,
+        4
+      ],
+      [
+        52,
+        976
+      ]
+    ]
+  },
+  {
+    "tag": "zeroday_throttle_aggressive_heldout",
+    "augmentation": "ratios_dup3",
+    "n_features_used": 50,
+    "n_train": 450145,
+    "n_test": 55322,
+    "n_pos_train": 131869,
+    "n_neg_train": 318276,
+    "n_pos_test": 27661,
+    "n_neg_test": 27661,
+    "acc": 0.9868226022197317,
+    "prec": 0.9977452502402602,
+    "recall": 0.9758504753985756,
+    "f1": 0.9866764141460295,
+    "roc_auc": 0.9988458406584251,
+    "acc_on_benign_test": 0.9977947290408878,
+    "acc_on_malicious_test": 0.9758504753985756,
+    "train_time_s": 126.5688624382019,
+    "infer_time_s": 0.23056602478027344,
+    "top10_importances": [
+      [
+        "len_per_iat",
+        0.3063224544346792
+      ],
+      [
+        "dur_per_pkt",
+        0.11746722683565963
+      ],
+      [
+        "len_max",
+        0.11442645631640382
+      ],
+      [
+        "len_mean",
+        0.07806657819191472
+      ],
+      [
+        "len_sum",
+        0.05486531051993262
+      ],
+      [
+        "iat_sum",
+        0.04651987640040298
+      ],
+      [
+        "len_median",
+        0.04475007240460906
+      ],
+      [
+        "burst_duration",
+        0.04236511289748159
+      ],
+      [
+        "pps_burst",
+        0.03301634097058793
+      ],
+      [
+        "iat_mean",
+        0.03297951282079837
+      ]
+    ],
+    "confusion": [
+      [
+        27600,
+        61
+      ],
+      [
+        668,
+        26993
+      ]
+    ]
+  }
+]

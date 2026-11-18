@@ -1,0 +1,62 @@
+=============================================================
+RF v2: features relativas e pesos enviesados para 0-day
+=============================================================
+Job: 32113 | Data: 18/11/2026
+Script: code/artigo/Code/zeroday_rf_v2.py
+
+1. O QUE FOI TESTADO
+-------------------------------------------------------------
+- v1: 17 features originais (reproduz job 32091)
+- v2a: 28 features (17 + 11 ratios)
+- v2b: 50 features (16 base + 11 ratios x3 — pesos enviesados)
+- v2b_5k: 50 features + 5k amostras por classe
+
+2. RESULTADOS PRINCIPAIS (acc_on_malicious_test)
+-------------------------------------------------------------
+Holdout         v1_500k  v2a_500k  v2b_500k  v2b_5k
+Baseline          0,993    0,993     0,993    0,992
+Laptop            0,983    0,984     0,984    0,985
+Raspberry         0,785    0,811     0,849    0,859
+Server            0,557    0,572     0,570    0,990
+WebOS             0,701    0,729     0,679    0,744
+AntMining         0,701    0,729     0,679    0,744
+MinerGate         0,555    0,539     0,580    0,985
+Webmine           0,823    0,821     0,820    0,815
+WebminePool       0,949    0,966     0,968    0,972
+Aggressive        0,975    0,976     0,976    0,978
+Stealthy          0,958    0,952     0,949    0,947
+
+3. ACHADO PRINCIPAL
+-------------------------------------------------------------
+As features relativas (v2a/v2b) NAO resolvem o colapso
+0-day em 500k: MinerGate fica em 0,54-0,58, Server em
+0,57. Ganho marginal de +2,5 p.p. (MinerGate) e +6,4 p.p.
+(Raspberry) sobre o v1.
+
+O fator causal e o TAMANHO DO TREINO: reduzir 500k -> 5k
+eleva MinerGate para 0,985 e Server para 0,990 (+43 p.p.),
+independente das features relativas.
+
+Confirma-se que 500k amostras sao suficientes para o modelo
+memorizar o fingerprint de PPS/APS do Server, e que
+engenharia de features NAO substitui controle do tamanho
+do treino.
+
+4. LIMITACOES
+-------------------------------------------------------------
+- WebOS/AntMining nao melhoram com nenhuma config (0,68-0,74).
+  O sinal discriminativo do C&C esta em escala inter-burst
+  (tasks a cada ~2 min), nao intra-burst (10 pacotes). As
+  17 features atuais nao capturam isso.
+- A duplicacao 3x (v2b) tem ganho quase nulo sobre v2a
+  (+0,9 p.p. em MinerGate, -2,2 p.p. em WebOS). Nao vale a
+  complexidade das 50 features.
+
+5. ARQUIVOS
+-------------------------------------------------------------
+- results/rf_zeroday/rf_v2_results_v1_repro.csv
+- results/rf_zeroday/rf_v2_results_v2a.csv
+- results/rf_zeroday/rf_v2_results_v2b.csv
+- results/rf_zeroday/rf_v2_results_v2b_5k.csv
+- code/artigo/Code/zeroday_rf_v2.py
+- slurm/run_rf_zeroday_v2.slurm
