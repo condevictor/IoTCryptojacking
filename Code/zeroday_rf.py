@@ -1,3 +1,22 @@
+"""
+zeroday_rf.py
+=============
+
+RF original (job 32091) — gerou o "gap de 44 p.p." que motivou a
+investigação. A VERSÃO ATUAL deste arquivo tem o bug de balanceamento
+CORRIGIDO (ver results/rf_zeroday/ERRATUM.txt), mas os resultados em
+results/rf_zeroday/ foram gerados pela VERSÃO ANTIGA (com bug).
+
+Para reprodutibilidade histórica, o commit e461bac documenta o que
+foi efetivamente rodado. Para uma versão balanceada, use
+rf_pruned_zeroday.py.
+
+Uso:
+    python3 Code/zeroday_rf.py \
+        --csv ../data/article/article_combined.csv \
+        --out ../results/rf_zeroday
+"""
+
 import os, json, time, argparse, warnings
 warnings.filterwarnings('ignore')
 import numpy as np

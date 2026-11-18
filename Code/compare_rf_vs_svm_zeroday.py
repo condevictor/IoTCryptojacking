@@ -1,3 +1,21 @@
+"""
+compare_rf_vs_svm_zeroday.py
+============================
+
+Compara Random Forest cheia (200 árvores, prof. 30) e SVM RBF
+(885-1805 SVs) sob protocolo zero-day, com as mesmas 17 features
+NumPy e mesmo split. Gera results/rf_vs_svm/rf_vs_svm_zeroday.{csv,json}
+→ Tabela XI do relatorio_final.pdf.
+
+Uso:
+    python3 Code/compare_rf_vs_svm_zeroday.py \
+        --csv ../data/article/article_combined.csv \
+        --out ../results/rf_vs_svm
+
+Tempo de execução: ~45 min em 16 cores (SVM RBF é O(n²); usamos
+10k amostras/classe para caber no orçamento).
+"""
+
 import os, json, time, argparse, warnings
 warnings.filterwarnings('ignore')
 import numpy as np

@@ -1,3 +1,24 @@
+"""
+rf_pruned_zeroday.py
+====================
+
+Versão podada do RF (50 árvores, profundidade 15) para deployment
+em roteador doméstico. Cabe em ~400 KB compilado via m2cgen (vs
+~19 MB da RF cheia). Mesmos 9 experimentos do
+compare_rf_vs_svm_zeroday.py, mas com modelo menor.
+
+Empata em acurácia com RF cheia (0,9174 vs 0,9167 média zero-day)
+e é ~2× mais rápido em inferência. Gera results/rf_pruned/ →
+Tabela X do relatorio_final.pdf.
+
+Uso:
+    python3 Code/rf_pruned_zeroday.py \
+        --csv ../data/article/article_combined.csv \
+        --out ../results/rf_pruned
+
+Tempo de execução: ~3 min (50 árvores × 10k/classe × 9 fits).
+"""
+
 import os, json, time, argparse, pickle, warnings
 warnings.filterwarnings('ignore')
 import numpy as np
