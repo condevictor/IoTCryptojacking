@@ -1,19 +1,68 @@
 ================================================================
-ERRATUM — Job 32091 (zeroday_rf.py, MAX_PER_CLASS=500.000)
+ERRATUM — experimentos de RF em protocolo 0-day (jobs 32091 e 32143)
 ================================================================
-Este experimento usou subsample_balanced() com MAX_PER_CLASS=500.000,
-que NÃO balanceia quando len(malicious_train) < MAX_PER_CLASS.
-Resultado: para holdouts de família/device com poucos bursts (MinerGate
-= 35.984 malicious vs 318.277 benign = 11:1 imbalanced), o RF
-aprendeu um manifold benigno dominante e classificou MinerGate OOD
-como benigno (acc_mal=0,555).
+Data: 18/11/2026
+Commits: e461bac (erratum inicial), 13b5b4c (scripts)
 
-O experimento corrigido (job 32143, MAX_PER_CLASS=10.000, balanceado
-1:1) mostra que o gap real é muito menor:
-  - MinerGate: RF acc_mal 0,555 (imbalanced) → 0,957 (balanced)
-  - SVM  acc_mal 0,999 (balanced)
+1. BUG IDENTIFICADO
+-------------------------------------------------------------
+A função subsample_balanced() nas versões anteriores de
+zeroday_rf.py e comparacoes relacionadas nao garantia 1:1
+quando uma das classes tinha menos amostras que MAX_PER_CLASS:
+    pos_s = min(max_per_class, len(pos))   # 35.984
+    neg_s = min(max_per_class, len(neg))   # 318.276
+Resultado: para o holdout MinerGate (malicious_train=35.984),
+o treino ficou 11:1 imbalanced, apesar do nome "balanced".
 
-A narrativa de "gap de 44 p.p." no README/documentação original
-deve ser lida com este erratum. O gap real (com treino balanceado)
-é de 3,7-20 p.p. para o RF, e 0,06-13 p.p. para o SVM.
+2. EFEITO DO BUG
+-------------------------------------------------------------
+RF com 500k/classe (job 32091):
+    MinerGate held-out: acc_mal = 0,555
+RF v2 com 50 features enriquecidas (ratios_dup3, mesmo bug):
+    MinerGate held-out: acc_mal = 0,580
+RF com 10k/classe BALANCEADO (job 32143):
+    MinerGate held-out: acc_mal = 0,957
+    --> o bug custou ~40 p.p. ao RF; as features extras so
+        recuperaram ~2,5 p.p. enquanto o bug persistia.
+
+3. RESULTADO CORRIGIDO (job 32143, 10k balanceado)
+-------------------------------------------------------------
+               RF       SVM      SVM - RF
+baseline       0,9937   0,9937   empate
+minergate      0,9569   0,9994   +4,3 pp
+antmining      0,7943   0,9110   +11,7 pp
+raspberry      0,8744   0,9603   +8,6 pp
+webmine        0,8244   0,8683   +4,4 pp
+webminepool    0,9745   0,9854   +1,1 pp
+laptop         0,9850   0,9946   +1,0 pp
+stealthy       0,9465   0,9893   +4,3 pp
+aggressive     0,9777   0,9886   +1,1 pp
+--------       ------   ------   -------
+media 0-day    0,9167   0,9584   +4,2 pp
+
+Inferencia (us/amostra):
+    RF:  1,4-1,6 (media ~1,5) -> ~600-700k amostras/s
+    SVM: 48-113     (media ~63) -> ~9-20k amostras/s
+    --> RF e 30-80x mais rapido.
+
+4. EXPERIMENTO INVALIDO (remover do paper)
+-------------------------------------------------------------
+svm_zeroday_results_rbf_nys_500k.csv: Nystroem(n_components=300)
+com C=1.0 e max_iter=5000. Todas as confusion matrices colapsaram
+para uma classe (acc_mal=0,0 ou 1,0 em todos os holdouts).
+Nao e um resultado de SVM — e um pipeline quebrado. Nao usar.
+
+5. NARRATIVA CORRIGIDA
+-------------------------------------------------------------
+Gap real do RF (baseline -> pior 0-day): 20,0 pp
+  (0,9937 baseline -> 0,7943 antmining)
+Gap real do SVM: 12,5 pp
+  (0,9937 baseline -> 0,8683 webmine)
+O "gap de 44 pp" reportado anteriormente (job 32091) foi
+inflado pelo bug de balanceamento, nao pela dificuldade
+intrinseca do problema.
+
+O SVM do artigo (Tekiner et al., NDSS 2022) e a escolha
+correta para robustez 0-day; o RF e a escolha correta para
+throughput. A escolha do artigo e defensavel.
 ================================================================
