@@ -1,118 +1,88 @@
-# Análise de deployment: RF vs SVM em roteador doméstico
+# Análise de deployment: RF vs SVM — Cenário A vs Cenário B
 
-Data: 18/11/2026
-Baseado em: job 32143 (RF vs SVM, 10k balanceado) + erratum do subsample_balanced
+Data: 18/11/2026 (corrigido)
+Baseado em: job 32143 (RF vs SVM, 10k balanceado) + job 32137 (curva do bug)
 
-## 1. Esclarecimento sobre os números de FP/FN (MinerGate held-out)
+## ⚠️ Correção importante (vs versão anterior deste documento)
 
-Confusion matrix `[[TN, FP], [FN, TP]]` do MinerGate held-out (test = 159.140 amostras):
+A versão anterior afirmava "SVM é inviável em roteador doméstico" sem
+distinguir DOIS cenários de deployment radicalmente diferentes. O paper
+de referência (Tekiner et al., NDSS 2022) usa o **Cenário B** (máquina
+acoplada ao router), NÃO o Cenário A (modelo no firmware do router).
 
-| | RF | SVM |
-|---|---|---|
-| TN (benigno correto) | 78.668 | 77.135 |
-| FP (benigno errado) | 902 | 2.435 |
-| FN (malicioso errado) | 3.427 | 51 |
-| TP (malicioso correto) | 76.143 | 79.519 |
-| Total benigno test | 79.570 | 79.570 |
-| Total malicioso test | 79.570 | 79.570 |
+Releitura do paper:
+- Page 2: "network traffic-based features can be collected in a unified
+  interface on the router" → observação do tráfego, não inferência
+- Page 5, Topology: "There is also another computer in the network
+  dedicated to collecting all the Internet traffic with port mirroring
+  and ARP rerouting/poisoning techniques"
+- Page 5, Table I: o router é um TP-Link Archer C7 v5 (Atheros QCA9563,
+  OpenWRT), usado só para rotear — a coleta e classificação acontecem
+  em uma máquina dedicada
 
-IMPORTANTE: 10.000 é o tamanho do TREINO (MAX_PER_CLASS=10k).
-O TEST usa todos os bursts do holdout (n_test=159.140). Os 902 FP são
-sobre 79.570 benignos, não sobre 10.000.
+Portanto: o setup do paper é **máquina acoplada**, não **modelo no router**.
 
-Métricas corretas:
-  RF:  FPR = 902/79.570  = 1,13%   |  FNR = 3.427/79.570 = 4,31%
-  SVM: FPR = 2.435/79.570 = 3,06%  |  FNR = 51/79.570    = 0,06%
+## Cenário A — Modelo no firmware do router (Atheros QCA9563, 128 MB)
 
-O SVM tem 2,7x mais FP que o RF, mas 70x menos FN.
+| Dimensão | Realidade |
+|---|---|
+| Hardware | MIPS 750 MHz, 128 MB RAM, OpenWRT |
+| Runtime Python/sklearn | Inviável — precisa exportar para C |
+| RF podado (50 árvores, prof 15) | Viável (~25 KB, 5-50 us/amostra) |
+| SVM RBF (885-1805 SVs) | Inviável (kernel RBF em C é raro; 0,5-5 ms/amostra) |
+| FPR baixo importa | Sim — usuário doméstico não faz triagem |
+| **Modelo recomendado** | **RF com poda + m2cgen para C** |
 
-## 2. Interpretação do FN de 4,3% (RF) no contexto de mineração
+## Cenário B — Modelo em máquina acoplada (setup do paper)
 
-Mineração de cripto é atividade CONTÍNUA, não evento único.
-Se um roteador vê N bursts de uma sessão de mineração:
-  P(não detectar nenhum dos N) = (0,0431)^N
+| Dimensão | Realidade |
+|---|---|
+| Hardware | Raspberry Pi 4, mini-PC, NUC (Linux) |
+| Runtime Python/sklearn | Viável — sklearn roda nativo |
+| RF cheio (200 árvores) | Viável (~20 us/amostra em Pi 4) |
+| SVM RBF (885-1805 SVs) | Viável (~400-1000 us/amostra em Pi 4) |
+| Throughput necessário (rede doméstica) | 5-50 bursts/s — ambos atendem |
+| FPR baixo importa | Sim, mitigado por agregação por device |
+| **Modelo recomendado** | **RF** (menor FPR, mais rápido, sem perda significativa) |
 
-Para N=100 bursts:
-  (0,0431)^100 ≈ 10^-138  (essencialmente zero)
+## Comparação honesta: em que cada modelo ganha
 
-Ou seja: o FNR de 4,3% POR BURST se traduz em detecção de SESSÃO
-próxima de 100% em segundos, porque o atacante precisa de throughput
-contínuo para minerar.
+| Dimensão | RF (proposto) | SVM (artigo) | Vencedor | Por quê importa |
+|---|---|---|---|---|
+| Acurácia 0-day (média) | 91,7% | **95,8%** | SVM (+4,2 pp) | Detecção pura |
+| Acurácia 0-day (pior caso) | 79,4% (AntMining) | **86,8% (Webmine)** | SVM | Webmine é o caso mais difícil |
+| Baseline in-distribution | **99,37%** | 99,37% | Empate | Reprodutibilidade do 99% |
+| FPR (MinerGate held-out) | **1,13%** | 3,06% | **RF (3x menor)** | Menos falsos alarmes |
+| FNR por burst (MinerGate) | 4,31% | **0,06%** | SVM | Detecção por burst |
+| FNR por sessão de mineração | ~100% | ~100% | Empate | Mineração é contínua |
+| Inferência (µs/amostra) | **1,4-1,6** | 48-113 | **RF (30-80x)** | Throughput de produção |
+| Modelo (tamanho) | **~19 MB (cheio) / ~25 KB (podado)** | ~60-120 KB | **RF podado** | Cabe no router |
+| Treino em 10k | 1,9 s | 0,8 s | SVM (marginal) | Irrelevante |
+| Treino em 100k+ | **~30-60 s** | 1-2 h | **RF (escala)** | Viabilidade |
+| Deployável em router (Cenário A) | **Sim (com poda)** | Não | **RF** | Único viável |
+| Deployável em Pi 4 (Cenário B) | **Sim** | Sim | Empate | Ambos cabem |
 
-O FNR por burst é a métrica correta para avaliação acadêmica, mas
-não é a métrica operacional para um detector contínuo.
+## Conclusão para o paper
 
-## 3. Viabilidade em roteador doméstico
+**Cenário B (setup do paper):** RF e SVM são viáveis em máquina acoplada
+(Raspberry Pi 4 ou superior). O SVM é 4,2 pp mais preciso em 0-day, mas
+o RF tem **3x menos falsos positivos** (1,13% vs 3,06%) e é **30-80x
+mais rápido** em inferência. Para deploy em escala com orçamento de
+hardware restrito, o RF é preferível; para análise forense ou threat
+hunting, o SVM é preferível.
 
-Hardware típico: MIPS/ARM single-core ~500 MHz, 128-256 MB RAM.
+**Cenário A (modelo no router):** apenas RF com poda é viável. O SVM
+não é deployável em firmware de router doméstico (kernel RBF sem
+implementação C eficiente). Nesse cenário, a pergunta "RF ou SVM?" não
+existe — a escolha é "RF podado ou nada".
 
-### SVM RBF: INVIÁVEL
-- 48-113 us/amostra em CPU servidor
-- 500-5000 us/amostra em roteador doméstico
-- ~200-2000 amostras/s: consome todo o orçamento de CPU do roteador
-  (que também precisa rodar Wi-Fi, NAT, DHCP, DNS, firewall)
-- Modelo: 885-1805 support vectors × 17 features × 4 bytes ≈ 60-120 KB
-  (cabe em RAM), mas o custo de CPU no kernel RBF é o gargalo
+**Narrativa honesta:** o RF proposto **não é mais preciso** que o SVM.
+Ele é **mais eficiente operacionalmente** (FPR, throughput, tamanho do
+modelo) e **deployável em cenários onde o SVM não cabe**. Para detecção
+pura de 0-day, o SVM do artigo está mais bem posicionado — e a escolha
+do artigo é defensável.
 
-### RF: VIÁVEL (com poda)
-- 1,4-1,6 us/amostra em CPU servidor
-- 15-75 us/amostra em roteador doméstico
-- ~13.000-66.000 amostras/s: usa 0,1-0,4% da CPU para tráfego doméstico
-- Modelo padrão (200 árvores, prof ~30): ~19 MB
-  --> precisa poda para caber em 128 MB de RAM
-
-### Poda recomendada para deployment em roteador
-- 50 árvores, profundidade 15 → ~800 KB  (perda estimada: 0,5-1,5 p.p.)
-- OU DecisionTreeClassifier único (prof 10-12) → ~5 KB  (perda maior)
-- Exportar para C via m2cgen ou treelite → elimina dependência sklearn,
-  roda em ~5 us/amostra no roteador
-
-## 4. Tabela de decisão por critério de deployment
-
-| Critério | RF | SVM | Peso no roteador |
-|---|---|---|---|
-| Cabe na CPU | OK (15-75 us) | NAO (0,5-5 ms) | Decisivo |
-| Cabe na RAM (com poda) | OK (~800 KB) | NAO | Decisivo |
-| Exportável para C | OK (m2cgen) | NAO (kernel RBF raro) | Alto |
-| Latência inline < 100 us | OK | NAO | Alto |
-| FPR baixo (usuário não triagem) | OK 1,1% | NAO 3,1% | Alto |
-| Acurácia 0-day | 91,7% | 95,8% | Médio (perde 4,2 pp) |
-| FNR por burst | 4,3% | 0,06% | Baixo (mitigado por sessão) |
-
-RF ganha em 5/7 critérios. Os 2 que SVM ganha têm peso menor no
-cenário doméstico porque:
-  - Acurácia: gap real corrigido é 2,1 pp (não 44 pp), diferença pequena
-  - FNR: mitigado pela detecção contínua (sessão detectada em segundos)
-
-## 5. Conclusão para o paper
-
-Para roteador doméstico, RF é a ÚNICA escolha viável. Não porque é mais
-preciso — o SVM é 4,2 pp mais preciso em média 0-day — mas porque o SVM
-não cabe no hardware.
-
-Com poda (50 árvores/prof 15) e exportação para C (m2cgen), o RF roda
-inline a 15-75 us/amostra usando ~1 MB de RAM. Detecta sessões de
-mineração com taxa próxima de 100% (mesmo com FNR de 4,3% por burst),
-porque mineração é atividade contínua.
-
-O FN de 3.427 NÃO é "deixar passar 3.427 vulnerabilidades" — é
-"deixar passar 4,3% dos bursts individuais", recuperado em segundos
-pela próxima detecção.
-
-## 6. O que realmente melhoraria a detecção no roteador (não é modelo)
-
-O gargalo não é o classificador — é a representação (17 features).
-Para roteador doméstico, os ganhos reais vêm de:
-
-1. Features de porta Stratum (3333/4444/5555/14444) — custo zero
-2. Features de assimetria upload/download — custo desprezível
-3. Features de periodicidade (autocorrelação dos IATs, janela 30s)
-4. Regras complementares (DNS de pool conhecido + porta Stratum)
-
-Essas features resolvem o caso AntMining (onde o RF cai para 0,794)
-sem precisar do SVM, e rodam a custo desprezível no roteador.
-
-## 7. Referências internas
-- Job 32143: results/rf_vs_svm/rf_vs_svm_zeroday.csv
-- Erratum: results/rf_zeroday/ERRATUM.txt
-- Curva de amplificação do bug: job 32137 (curve2) documentado no erratum
+## Referências internas
+- Job 32143: ../../results/rf_vs_svm/rf_vs_svm_zeroday.csv
+- Job 32137 (curva do bug): ../../results/rf_zeroday/ERRATUM.txt
+- RF podado (se rodado): ../../results/rf_pruned/rf_pruned_results.csv
