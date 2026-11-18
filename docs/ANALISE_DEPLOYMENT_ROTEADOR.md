@@ -56,7 +56,7 @@ Portanto: o setup do paper é **máquina acoplada**, não **modelo no router**.
 | FNR por burst (MinerGate) | 4,31% | **0,06%** | SVM | Detecção por burst |
 | FNR por sessão de mineração | ~100% | ~100% | Empate | Mineração é contínua |
 | Inferência (µs/amostra) | **1,4-1,6** | 48-113 | **RF (30-80x)** | Throughput de produção |
-| Modelo (tamanho) | **~19 MB (cheio) / ~25 KB (podado)** | ~60-120 KB | **RF podado** | Cabe no router |
+| Modelo (tamanho) | ~19 MB (cheio) / **~400 KB (podado, compilado)** | **~60-120 KB** | Empate (SVM menor, mas kernel RBF em C é raro) | Cabe no router (RF) / raro (SVM) |
 | Treino em 10k | 1,9 s | 0,8 s | SVM (marginal) | Irrelevante |
 | Treino em 100k+ | **~30-60 s** | 1-2 h | **RF (escala)** | Viabilidade |
 | Deployável em router (Cenário A) | **Sim (com poda)** | Não | **RF** | Único viável |
