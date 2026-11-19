@@ -41,11 +41,11 @@ Este trabalho:
 
 | Modelo | Acc baseline | Acc zero-day (média) | FPR | Inferência | Tamanho (deploy) |
 |---|---|---|---|---|---|
-| SVM RBF (artigo) | 99,4% | **96,2%** | 3,06% | 48–113 µs | ~60–120 KB |
+| SVM RBF (17 car.) | 99,4% | **96,2%** | 3,06% | 48–113 µs | ~60–120 KB |
 | RF cheia (200 árv.) | 99,4% | 91,7% | 1,13% | 1,41–1,55 µs | ~19 MB |
 | **RF podada (50 árv.)** | **99,4%** | 91,7% | **1,18%** | **0,80–1,25 µs** | **~400 KB (C)** |
 
-**Interpretação:** o SVM do artigo é 4,1–4,5 p.p. mais robusto no
+**Interpretação:** o SVM com as mesmas 17 características é 4,1–4,5 p.p. mais robusto no
 zero-day; a RF podada tem **2,6× menos falsos positivos** e é
 **40–140× mais rápida**, além de caber em firmware (~400 KB contra
 ~19 MB da RF cheia). O trade-off é acurácia por viabilidade de
